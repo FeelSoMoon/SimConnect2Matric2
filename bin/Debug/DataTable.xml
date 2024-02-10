@@ -1,0 +1,61 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="SimConnectDataTable" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="SimConnectDataTable">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="DataItem" type="xs:string" minOccurs="0" />
+                <xs:element name="DataType" msdata:DataType="SimConnectDataTypes, SimConnect2Matric2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" type="xs:anyType" minOccurs="0" />
+                <xs:element name="MatricType" msdata:DataType="MatricDataTypes, SimConnect2Matric2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" type="xs:anyType" minOccurs="0" />
+                <xs:element name="Value" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <SimConnectDataTable>
+    <DataItem>PLANE LATITUDE</DataItem>
+    <DataType>3</DataType>
+    <MatricType>1</MatricType>
+  </SimConnectDataTable>
+  <SimConnectDataTable>
+    <DataItem>PLANE LONGITUDE</DataItem>
+    <DataType>3</DataType>
+    <MatricType>1</MatricType>
+  </SimConnectDataTable>
+  <SimConnectDataTable>
+    <DataItem>PLANE ALTITUDE</DataItem>
+    <DataType>1</DataType>
+    <MatricType>0</MatricType>
+  </SimConnectDataTable>
+  <SimConnectDataTable>
+    <DataItem>PLANE HEADING DEGREES TRUE</DataItem>
+    <DataType>2</DataType>
+    <MatricType>3</MatricType>
+  </SimConnectDataTable>
+  <SimConnectDataTable>
+    <DataItem>TRANSPONDER CODE:1</DataItem>
+    <DataType>0</DataType>
+    <MatricType>5</MatricType>
+  </SimConnectDataTable>
+  <SimConnectDataTable>
+    <DataItem>COM STATUS:1</DataItem>
+    <DataType>0</DataType>
+    <MatricType>0</MatricType>
+  </SimConnectDataTable>
+  <SimConnectDataTable>
+    <DataItem>COM ACTIVE FREQUENCY:1</DataItem>
+    <DataType>0</DataType>
+    <MatricType>4</MatricType>
+  </SimConnectDataTable>
+  <SimConnectDataTable>
+    <DataItem>COM STANDBY FREQUENCY:1</DataItem>
+    <DataType>0</DataType>
+    <MatricType>4</MatricType>
+  </SimConnectDataTable>
+</NewDataSet>

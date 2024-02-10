@@ -1,0 +1,16 @@
+M:\Dropbox\Dropbox\Codey Things\Visual Studio\Projects\SimConnect2Matric2\bin\Debug\SimConnect2Matric2.exe.config
+M:\Dropbox\Dropbox\Codey Things\Visual Studio\Projects\SimConnect2Matric2\bin\Debug\SimConnect2Matric2.exe
+M:\Dropbox\Dropbox\Codey Things\Visual Studio\Projects\SimConnect2Matric2\bin\Debug\SimConnect2Matric2.pdb
+M:\Dropbox\Dropbox\Codey Things\Visual Studio\Projects\SimConnect2Matric2\obj\Debug\SimConnect2Matric2.csproj.AssemblyReference.cache
+M:\Dropbox\Dropbox\Codey Things\Visual Studio\Projects\SimConnect2Matric2\obj\Debug\SimConnect2Matric2.Form1.resources
+M:\Dropbox\Dropbox\Codey Things\Visual Studio\Projects\SimConnect2Matric2\obj\Debug\SimConnect2Matric2.Properties.Resources.resources
+M:\Dropbox\Dropbox\Codey Things\Visual Studio\Projects\SimConnect2Matric2\obj\Debug\SimConnect2Matric2.csproj.GenerateResource.cache
+M:\Dropbox\Dropbox\Codey Things\Visual Studio\Projects\SimConnect2Matric2\obj\Debug\SimConnect2Matric2.csproj.CoreCompileInputs.cache
+M:\Dropbox\Dropbox\Codey Things\Visual Studio\Projects\SimConnect2Matric2\obj\Debug\SimConnect2Matric2.exe
+M:\Dropbox\Dropbox\Codey Things\Visual Studio\Projects\SimConnect2Matric2\obj\Debug\SimConnect2Matric2.pdb
+M:\Dropbox\Dropbox\Codey Things\Visual Studio\Projects\SimConnect2Matric2\bin\Debug\Microsoft.FlightSimulator.SimConnect.dll
+M:\Dropbox\Dropbox\Codey Things\Visual Studio\Projects\SimConnect2Matric2\obj\Debug\SimConnect2Matric2.csproj.CopyComplete
+M:\Dropbox\Dropbox\Codey Things\Visual Studio\Projects\SimConnect2Matric2\bin\Debug\MatricIntegration.dll
+M:\Dropbox\Dropbox\Codey Things\Visual Studio\Projects\SimConnect2Matric2\bin\Debug\MatricIntegration.pdb
+M:\Dropbox\Dropbox\Codey Things\Visual Studio\Projects\SimConnect2Matric2\bin\Debug\Newtonsoft.Json.dll
+M:\Dropbox\Dropbox\Codey Things\Visual Studio\Projects\SimConnect2Matric2\bin\Debug\Newtonsoft.Json.xml
