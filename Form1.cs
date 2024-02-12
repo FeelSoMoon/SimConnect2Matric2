@@ -9,6 +9,16 @@ using System.Collections.Generic;
 using Microsoft.FlightSimulator.SimConnect;
 using Matric.Integration;
 using System.ComponentModel;
+using System.Drawing;
+using System.Diagnostics;
+using System.Reflection.Emit;
+using static System.Net.Mime.MediaTypeNames;
+using System.Diagnostics.Eventing.Reader;
+using static Matric.Integration.ServerVariable;
+using System.Timers;
+using static System.Windows.Forms.LinkLabel;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Net.Sockets;
 
 public enum SimConnectDataTypes
 {
@@ -45,6 +55,54 @@ enum DATA_REQUESTS
 enum EVENT_ID
 {
     TEXT,
+};
+
+enum SIMCONNECT_EXCEPTION
+{
+    SIMCONNECT_EXCEPTION_NONE,
+    SIMCONNECT_EXCEPTION_ERROR,
+    SIMCONNECT_EXCEPTION_SIZE_MISMATCH,
+    SIMCONNECT_EXCEPTION_UNRECOGNIZED_ID,
+    SIMCONNECT_EXCEPTION_UNOPENED,
+    SIMCONNECT_EXCEPTION_VERSION_MISMATCH,
+    SIMCONNECT_EXCEPTION_TOO_MANY_GROUPS,
+    SIMCONNECT_EXCEPTION_NAME_UNRECOGNIZED,
+    SIMCONNECT_EXCEPTION_TOO_MANY_EVENT_NAMES,
+    SIMCONNECT_EXCEPTION_EVENT_ID_DUPLICATE,
+    SIMCONNECT_EXCEPTION_TOO_MANY_MAPS,
+    SIMCONNECT_EXCEPTION_TOO_MANY_OBJECTS,
+    SIMCONNECT_EXCEPTION_TOO_MANY_REQUESTS,
+    SIMCONNECT_EXCEPTION_WEATHER_INVALID_PORT,
+    SIMCONNECT_EXCEPTION_WEATHER_INVALID_METAR,
+    SIMCONNECT_EXCEPTION_WEATHER_UNABLE_TO_GET_OBSERVATION,
+    SIMCONNECT_EXCEPTION_WEATHER_UNABLE_TO_CREATE_STATION,
+    SIMCONNECT_EXCEPTION_WEATHER_UNABLE_TO_REMOVE_STATION,
+    SIMCONNECT_EXCEPTION_INVALID_DATA_TYPE,
+    SIMCONNECT_EXCEPTION_INVALID_DATA_SIZE,
+    SIMCONNECT_EXCEPTION_DATA_ERROR,
+    SIMCONNECT_EXCEPTION_INVALID_ARRAY,
+    SIMCONNECT_EXCEPTION_CREATE_OBJECT_FAILED,
+    SIMCONNECT_EXCEPTION_LOAD_FLIGHTPLAN_FAILED,
+    SIMCONNECT_EXCEPTION_OPERATION_INVALID_FOR_OBJECT_TYPE,
+    SIMCONNECT_EXCEPTION_ILLEGAL_OPERATION,
+    SIMCONNECT_EXCEPTION_ALREADY_SUBSCRIBED,
+    SIMCONNECT_EXCEPTION_INVALID_ENUM,
+    SIMCONNECT_EXCEPTION_DEFINITION_ERROR,
+    SIMCONNECT_EXCEPTION_DUPLICATE_ID,
+    SIMCONNECT_EXCEPTION_DATUM_ID,
+    SIMCONNECT_EXCEPTION_OUT_OF_BOUNDS,
+    SIMCONNECT_EXCEPTION_ALREADY_CREATED,
+    SIMCONNECT_EXCEPTION_OBJECT_OUTSIDE_REALITY_BUBBLE,
+    SIMCONNECT_EXCEPTION_OBJECT_CONTAINER,
+    SIMCONNECT_EXCEPTION_OBJECT_AI,
+    SIMCONNECT_EXCEPTION_OBJECT_ATC,
+    SIMCONNECT_EXCEPTION_OBJECT_SCHEDULE,
+    SIMCONNECT_EXCEPTION_JETWAY_DATA,
+    SIMCONNECT_EXCEPTION_ACTION_NOT_FOUND,
+    SIMCONNECT_EXCEPTION_NOT_AN_ACTION,
+    SIMCONNECT_EXCEPTION_INCORRECT_ACTION_PARAMS,
+    SIMCONNECT_EXCEPTION_GET_INPUT_EVENT_FAILED,
+    SIMCONNECT_EXCEPTION_SET_INPUT_EVENT_FAILED,
 };
 
 
@@ -88,7 +146,8 @@ namespace SimConnect2Matric2
         SimConnect simconnect = null;
         // User-defined win32 event
         const int WM_USER_SIMCONNECT = 0x0402;
-        const int MAX_LOG_SIZE = 1024;
+
+        const int MAX_LOG_SIZE = 100;
 
         readonly string logFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "debug.log");
         readonly string dataTablePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "DataTable.xml");
@@ -104,11 +163,13 @@ namespace SimConnect2Matric2
         const string MATRIC_DECK_ID = "";
         const int MATRIC_API_PORT = 50300;
         public static string CLIENT_ID;
+        static System.Timers.Timer timer;
 
+        private readonly object lockCheck = new object();
+        private bool CheckingForApps = false;
 
         static Matric.Integration.Matric matric;
 
-        //List<string> DataItemList = new List<string>();
         Dictionary<int, Dictionary<string, string>> DataDictionary = new Dictionary<int, Dictionary<string, string>>();
 
         public Form1()
@@ -118,94 +179,116 @@ namespace SimConnect2Matric2
             InitializeDataGridView();
             InitializeDataTable();
             BindDataTableToDataGridView();
-            //InitDataRequest();
-            //InitMatric();
 
-            updateLabels();
-
+            if (!CheckingForApps)
+            {
+                CheckForRunningApps();
+            }
             this.FormClosing += Form1_FormClosing;
-
         }
 
-        public void updateLabels()
+        private void MatricSetStatus(int status, bool set = true)
         {
-            if (MatricStatus)
+            Color color;
+            switch (status)
             {
-                labelMatricStatus.Text = "Online";
+                case 2:
+                    color = Color.Yellow;
+                    if (set) { MatricStatus = true; }
+                    
+                    break;
+                case 3:
+                    color = Color.Green;
+                    if (set) { MatricStatus = true; }
+                    retryMatricToolStripMenuItem.Enabled = false;
+                    break;
+                default:
+                    color = Color.Red;
+                    if (set) { MatricStatus = false; }
+                    break;
+            }
+            if (statusStrip1.InvokeRequired)
+            {
+                // Call the same method on the UI thread
+                statusStrip1.Invoke(new Action(() => MatricSetStatus(status)));
             }
             else
             {
-                labelMatricStatus.Text = "Offline";
+                // Update label color on the UI thread
+                toolStripProgressBarMatric.BackColor = color;
             }
+        }
 
-            if (SimConnectStatus)
+        private void SimConnectSetStatus(int status)
+        {
+            Color color;
+            switch (status)
             {
-                labelSimConnectStatus.Text = "Online";
+                case 2:
+                    color = Color.Yellow;
+                    SimConnectStatus = true;
+                    break;
+                case 3:
+                    color = Color.Green;
+                    SimConnectStatus = true;
+                    break;
+                default:
+                    color = Color.Red;
+                    SimConnectStatus = false;
+                    break;
+            }
+            if (statusStrip1.InvokeRequired)
+            {
+                // Call the same method on the UI thread
+                statusStrip1.Invoke(new Action(() => SimConnectSetStatus(status)));
             }
             else
             {
-                labelSimConnectStatus.Text = "Offline";
-            }
-
-            if (RunMatric)
-            {
-                labelMatricEnabled.Text = "True";
-            }
-            else
-            {
-                labelMatricEnabled.Text = "False";
-            }
-
-            if (RunSimConnect)
-            {
-                labelSimConnectEnabled.Text = "True";
-            }
-            else
-            {
-                labelSimConnectEnabled.Text = "False";
+                // Update label color on the UI thread
+                toolStripProgressBarSimConnect.BackColor = color;
             }
         }
 
         private void InitMatric()
         {
-            updateLabels();
-            WriteLog("Init Matric");
+
+            matric = null;
+            WriteLog("Initialising Matric");
             try
             {
                 matric = new Matric.Integration.Matric(MATRIC_APP_NAME, "", MATRIC_API_PORT);
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 WriteLog("Matric: " + ex.Message);
             }
-            matric.PIN = "";
-            matric.OnError += Matric_OnError;
-            matric.OnConnectedClientsReceived += Matric_OnConnectedClientsReceived;
-            matric.OnControlInteraction += Matric_OnControlInteraction;
-            matric.OnVariablesChanged += Matric_OnVariablesChanged;
+            if(matric!=null)
+            { 
+                matric.PIN = "";
+                matric.OnError += Matric_OnError;
+                matric.OnConnectedClientsReceived += Matric_OnConnectedClientsReceived;
+                matric.OnControlInteraction += Matric_OnControlInteraction;
+                matric.OnVariablesChanged += Matric_OnVariablesChanged;
 
-            MatricGetClients();
+                MatricGetClients();
+            }
         }
 
         private void Matric_OnVariablesChanged(object sender, ServerVariablesChangedEventArgs data)
         {
-            Console.WriteLine("Server variables changed");
-            foreach (string varName in data.ChangedVariables)
-            {
-                Console.WriteLine($"{varName}: {data.Variables[varName].Value}");
-            }
+            //DO NOTHING
         }
 
         private void Matric_OnError(Exception ex)
         {
-            Console.WriteLine(ex.Message);
+            WriteLog($"Matric Error: {ex}");
             MatricStatus = false;
-            updateLabels();
+            MatricSetStatus(1);
         }
 
         private void Matric_OnControlInteraction(object sender, object data)
         {
-            Console.WriteLine("Control interaction:");
-            Console.WriteLine(data.ToString());
+            //DO NOTHING
         }
 
         private void Matric_OnConnectedClientsReceived(object source, List<ClientInfo> clients)
@@ -217,22 +300,20 @@ namespace SimConnect2Matric2
         {
             if (connectedClients.Count == 0)
             {
+                CLIENT_ID = null;
                 MatricStatus = false;
-                updateLabels();
-                Console.WriteLine("No connected devices found, make sure your smartphone/tablet is connected\nPress any key to exit");
+                MatricSetStatus(2);
+                WriteLog("Matric: No connected devices found");
             }
             else
             {
-                Console.WriteLine("Matric: Found devices:");
-                MatricStatus = true;
-                updateLabels();
                 foreach (ClientInfo client in connectedClients)
                 {
-                    Console.WriteLine($@"{client.Id} {client.Name}");
+                   WriteLog($@"Matric Found devices: {client.Name}");
                 }
                 CLIENT_ID = connectedClients[0].Id;
-                Console.WriteLine("Starting test on first device");
-                MatricTest();
+                MatricStatus = true;
+                MatricSetStatus(3);
             }
         }
 
@@ -248,14 +329,15 @@ namespace SimConnect2Matric2
             List<ServerVariable> variables = new List<ServerVariable>() {
                 vString
             };
+
             matric.SetVariables(variables);
         }
 
         private void MatricGetClients()
         {
-            WriteLog("Matric: Getting Clients");
             if (matric != null)
             {
+                WriteLog("Matric: Getting Clients");
                 matric.GetConnectedClients();
             }
         }
@@ -280,9 +362,13 @@ namespace SimConnect2Matric2
         private async void LoadLogFile()
         {
             try{
-                textLog.Text = File.ReadAllText(logFilePath);
-                await Task.Delay(100);
-                ScrollTextBoxToBottom(textLog);
+                int NumberOfLinesToShow = 28;
+                var lines = File.ReadLines(logFilePath);
+                var lastLines = lines.Skip(Math.Max(0, lines.Count() - NumberOfLinesToShow));
+
+                textLog.Text= string.Join(Environment.NewLine, lastLines);
+                await Task.Delay(25);
+                //ScrollTextBoxToBottom(textLog);
             }
             catch (Exception ex)
             {
@@ -295,38 +381,48 @@ namespace SimConnect2Matric2
 
         private void WriteLog(string newline)
         {
-            //Console.WriteLine("Trying to write: "+newline);
-            FileInfo fileInfo = new FileInfo(logFilePath);
-            if (fileInfo.Exists)
+            if (textLog.InvokeRequired)
             {
-                //Console.WriteLine("fileInfo exists");
-                // Get the size of the file in bytes
-                long fileSizeInBytes = fileInfo.Length;
-
-                // Convert bytes to kilobytes or megabytes for better readability
-                double fileSizeInKB = fileSizeInBytes / 1024.0; // Bytes to Kilobytes
-
-                string[] lines = File.ReadAllLines(logFilePath);
-
-                if (fileSizeInKB > MAX_LOG_SIZE)
-                {
-                    // Skip the first line and get the remaining lines
-                    lines = lines.Skip(50).ToArray();
-                }
-                lines = lines.Concat(new[] { DateTime.Now.ToString() + " - " + newline }).ToArray();
-                try
-                {
-                    File.WriteAllLines(logFilePath, lines);
-
-                }
-                catch (IOException ex)
-                {
-                    // Handle the case where the file is in use
-                    Console.WriteLine($"Error writing to the file: {ex.Message}");
-                }
-                LoadLogFile();
-                
+                // Call the same method on the UI thread
+                textLog.Invoke(new Action(() => WriteLog(newline)));
             }
+            else
+            {
+                string currentTimeFormatted = DateTime.Now.ToString("HH:mm:ss");
+                //Console.WriteLine("Trying to write: "+newline);
+                FileInfo fileInfo = new FileInfo(logFilePath);
+                if (fileInfo.Exists)
+                {
+                    //Console.WriteLine("fileInfo exists");
+                    // Get the size of the file in bytes
+                    long fileSizeInBytes = fileInfo.Length;
+
+                    // Convert bytes to kilobytes or megabytes for better readability
+                    double fileSizeInKB = fileSizeInBytes / 1024.0; // Bytes to Kilobytes
+
+                    string[] lines = File.ReadAllLines(logFilePath);
+
+                    if (fileSizeInKB > MAX_LOG_SIZE)
+                    {
+                        // Skip the first line and get the remaining lines
+                        lines = lines.Skip(50).ToArray();
+                    }
+                    lines = lines.Concat(new[] { currentTimeFormatted + " - " + newline }).ToArray();
+                    Console.WriteLine(currentTimeFormatted + " - " + newline);
+                    try
+                    {
+                        File.WriteAllLines(logFilePath, lines);
+
+                    }
+                    catch (IOException ex)
+                    {
+                        // Handle the case where the file is in use
+                        Console.WriteLine($"Error writing to the file: {ex.Message}");
+                    }
+                    LoadLogFile();
+                }
+            }
+            
         }
 
         private Boolean CheckDebugExists()
@@ -348,13 +444,13 @@ namespace SimConnect2Matric2
 
         private void InitializeDataGridView()
         {
-            WriteLog("Init DataGridView");
+            WriteLog("Initialising DataGridView");
             // Create a DataGridViewComboBoxColumn for the enum field
             DataGridViewTextBoxColumn textDataItem = new DataGridViewTextBoxColumn
             {
                 HeaderText = "Data Item",
                 DataPropertyName = "DataItem",
-                Width = 340
+                Width = 320
             };
 
             DataGridViewComboBoxColumn comboBoxDataType = new DataGridViewComboBoxColumn
@@ -362,7 +458,7 @@ namespace SimConnect2Matric2
                 HeaderText = "Data Type",
                 DataPropertyName = "DataType",
                 DataSource = Enum.GetValues(typeof(SimConnectDataTypes)),
-                Width = 100
+                Width = 75
             };
 
             DataGridViewComboBoxColumn comboBoxMatricType = new DataGridViewComboBoxColumn
@@ -370,7 +466,7 @@ namespace SimConnect2Matric2
                 HeaderText = "Matric Type",
                 DataPropertyName = "MatricType",
                 DataSource = Enum.GetValues(typeof(MatricDataTypes)),
-                Width = 170
+                Width = 120
             };
 
             // Add the DataGridViewComboBoxColumn to the DataGridView
@@ -386,7 +482,7 @@ namespace SimConnect2Matric2
 
         private void InitializeDataTable()
         {
-            WriteLog("Init DataTable");
+            WriteLog("Initialising DataTable");
             myDataTable.Columns.Add("DataItem", typeof(string));
             myDataTable.Columns.Add("DataType", typeof(SimConnectDataTypes));
             myDataTable.Columns.Add("MatricType", typeof(MatricDataTypes));
@@ -400,12 +496,6 @@ namespace SimConnect2Matric2
             dataGridView1.DataSource = myDataTable;
         }
 
-        private void ButtonSave_Click(object sender, EventArgs e)
-        {
-            WriteLog("User Triggered XML Save");
-            SaveXML();
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             //Console.WriteLine(baseDirectory);
@@ -415,16 +505,84 @@ namespace SimConnect2Matric2
                 LoadXML();
             }
         }
+        private void CheckForRunningApps()
+        {
+            CheckingForApps = true;
+
+            string matricName = "MatricServer"; // Replace with the actual process name
+            string msfsName = "FlightSimulator"; // Replace with the actual process name
+
+            WriteLog("Checking for required applications");
+            int seconds = 60;
+            timer = new System.Timers.Timer(1000 * seconds); // Interval is in milliseconds, e.g., 1000 ms = 1 second
+
+            timer.Elapsed += OnTimedEvent;
+            timer.AutoReset = false; // Set to true if you want the timer to repeat
+
+            if (IsProcessRunning(matricName) && !MatricStatus)
+            {
+                WriteLog($"Found {matricName}");
+                RunMatric = true;
+                InitMatric();
+            }
+            else if (!IsProcessRunning(matricName))
+            {
+                WriteLog($"{matricName} is not running");
+            }
+
+            if (IsProcessRunning(msfsName) && !SimConnectStatus)
+            {
+                WriteLog($"Found {msfsName}");
+                RunSimConnect = true;
+                InitDataRequest();
+            }
+            else if (!IsProcessRunning(msfsName))
+            {
+                WriteLog($"{msfsName} is not running");
+            }
+
+            if (!MatricStatus || !SimConnectStatus)
+            {
+                timer.Start();
+                WriteLog($"Will check again for required apps in {seconds} seconds");
+            }
+            if (MatricStatus && SimConnectStatus)
+            {
+                timer.Stop();
+                CheckingForApps = false;
+            }
+        }
+
+        private void OnTimedEvent(object sender, ElapsedEventArgs e)
+        {
+            // Perform UI-related operations on the UI thread using Invoke
+            Invoke(new Action(() =>
+            {
+                CheckForRunningApps();
+            }));
+        }
+
+        static bool IsProcessRunning(string processName)
+        {
+            Process[] processes = Process.GetProcessesByName(processName);
+            return processes.Length > 0;
+        }
 
         private void SaveXML()
         {
+            //Console.WriteLine("trying to save");
+            foreach (DataRow row in myDataTable.Rows)
+            {
+                row["Value"] = "";
+            }
+
+
             myDataTable.AcceptChanges();
             myDataTable.WriteXml(dataTablePath, XmlWriteMode.WriteSchema, true);
         }
 
         private void LoadXML()
         {
-
             try
             {
                 // Load the XML file into a new DataTable
@@ -458,21 +616,6 @@ namespace SimConnect2Matric2
             { return true; }else { return false; }
         }
 
-        private void ButtonLoad_Click(object sender, EventArgs e)
-        {
-            LoadXML();
-        }
-
-        private void ButtonOpenSaveFile_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start(dataTablePath);
-        }
-
-        private void ButtonSync_Click(object sender, EventArgs e)
-        {
-            //do stuff
-        }
-
         private void DataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             // Handle the data error
@@ -480,26 +623,6 @@ namespace SimConnect2Matric2
 
             // Optionally, you can cancel the DataGridView's default behavior
             e.ThrowException = false;
-        }
-
-        private void BtnSimConnect_Click(object sender, EventArgs e)
-        {
-            simconnect = null;
-
-            WriteLog("Enabling SimConnect Connection");
-            RunSimConnect = true;
-            InitDataRequest();
-            this.Text = "Retry SimConnect";
-            updateLabels();
-        }
-
-        private void BtnMatric_Click(object sender, EventArgs e)
-        {
-            WriteLog("Enabling Matric Connection");
-            RunMatric = true;
-            InitMatric();
-            this.Text = "Retry Matric";
-            updateLabels();
         }
 
         public string ObjToMatricType(object myObj)
@@ -533,9 +656,26 @@ namespace SimConnect2Matric2
             }
         }
 
+
+        public string SimConnectExceptionToString(object myObj)
+        {
+            SIMCONNECT_EXCEPTION[] enumValues = (SIMCONNECT_EXCEPTION[])Enum.GetValues(typeof(SIMCONNECT_EXCEPTION));
+            if (int.TryParse(myObj.ToString(), out int intValue))
+            {
+                //Console.WriteLine($"Converted value: {intValue}");
+                //Console.WriteLine($"Selected Enum Value: {selectedEnumValue}");
+                SIMCONNECT_EXCEPTION selectedEnumValue = enumValues[intValue];
+                return selectedEnumValue.ToString();
+            }
+            else
+            {
+                return "";
+            }
+        }
+
         private void InitDataRequest()
         {
-            WriteLog("init DataRequest");
+            WriteLog("Initialising DataRequest");
 
             try
             {
@@ -543,14 +683,28 @@ namespace SimConnect2Matric2
             }
             catch (COMException ex)
             {
-                WriteLog("EXCEPTION SimConnect " + ex);
+                if(ex.ErrorCode == -2147467259)
+                {
+                    WriteLog("MSFS isn't running, or it's running and the SDK/SimConnect isn't installed.");
+                    return;
+                }
+                else
+                {
+                    WriteLog("EXCEPTION SimConnect " + ex);
+                    return;
+                }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
             try
             {
                 if (simconnect != null)
                 {
                     SimConnectStatus = true;
-                    updateLabels();
+                    SimConnectSetStatus(3);
                     WriteLog("SimConnect DataRequest active");
                     // listen to connect and quit msgs
                     simconnect.OnRecvOpen += new SimConnect.RecvOpenEventHandler(Simconnect_OnRecvOpen);
@@ -610,7 +764,16 @@ namespace SimConnect2Matric2
             {
                 if (simconnect != null)
                 {
-                    simconnect.ReceiveMessage();
+                    try
+                    {
+                        simconnect.ReceiveMessage();
+                    } catch (Exception ex) {
+                        WriteLog("MSFS was closed unexpectedly");
+                        SimConnectSetStatus(1);
+                        if (!CheckingForApps) {
+                            CheckForRunningApps();
+                        }
+                    }
                 }
             }
             else
@@ -623,7 +786,7 @@ namespace SimConnect2Matric2
         {
             WriteLog("SimConnect connection established");
             SimConnectStatus = true;
-            updateLabels();
+            SimConnectSetStatus(3);
         }
 
         // The case where the user closes the sim
@@ -631,14 +794,16 @@ namespace SimConnect2Matric2
         {
             WriteLog("SimConnect connection lost");
             SimConnectStatus = false;
-            updateLabels();
+            SimConnectSetStatus(1);
         }
 
         void Simconnect_OnRecvException(SimConnect sender, SIMCONNECT_RECV_EXCEPTION data)
         {
-             WriteLog("SimConnect recieved an error: " + data.dwException);
+
+            WriteLog("SimConnect recieved an error: " + SimConnectExceptionToString(data.dwException));
             SimConnectStatus = false;
-            updateLabels();
+            SimConnectSetStatus(2);
+            InitDataRequest();
         }
 
         void Simconnect_OnRecvSimobjectData(SimConnect sender, SIMCONNECT_RECV_SIMOBJECT_DATA data)
@@ -651,22 +816,25 @@ namespace SimConnect2Matric2
                     if (RunSimConnect) { 
                     int i = 0;
 
+                        DataDictionary.Clear();
+
                         foreach (DataRow row in myDataTable.Rows)
                         {
 
                             string fieldName = $"d{i}";
                             var fieldValue = typeof(SimConnectData).GetField(fieldName)?.GetValue(s1);
                             string formattedData = FormatData(fieldValue, ObjToMatricType(row["MatricType"]));
+                            string storedValue = row["Value"]?.ToString()?.Trim();
 
                             if (fieldValue != null)
                             {
-                                if(formattedData != row["Value"].ToString())
+                                if (formattedData != storedValue)
                                 { 
-                                Console.WriteLine("value changed from "+ row["Value"].ToString()+" to "+ formattedData);
-                                // Do something with the field value
-                                //Console.WriteLine($"Value of {fieldName}: {fieldValue}");
-                                row["Value"] = formattedData;
-                                DataDictionary[i] = new Dictionary<string, string> { { row["DataItem"].ToString(), formattedData } };
+                                    WriteLog(row["DataItem"].ToString() + " changed from " + row["Value"].ToString() + " to " + formattedData);
+                                    // Do something with the field value
+                                    //Console.WriteLine($"Value of {fieldName}: {fieldValue}");
+                                    row["Value"] = formattedData;
+                                    DataDictionary[i] = new Dictionary<string, string> { { row["DataItem"].ToString(), formattedData } };
                                 }
                                 else
                                 {
@@ -683,9 +851,6 @@ namespace SimConnect2Matric2
                         //check if we're sending this to Matric
                         if(MatricStatus && RunMatric)
                         {
-
-                            
-
                             List<ServerVariable> variables = new List<ServerVariable>() {
                             };
 
@@ -697,19 +862,39 @@ namespace SimConnect2Matric2
                                 // Iterate through the inner dictionary
                                 foreach (KeyValuePair<string, string> innerKvp in outerKvp.Value)
                                 {
-                                    //Console.WriteLine($"  Inner Key: {innerKvp.Key}, Value: {innerKvp.Value}");
+                                    //search datatable, check if this has the output type of "button"
+                                    DataRow[] searchResults = myDataTable.Select($"DataItem = '{innerKvp.Key}'");
+                                    string matricTypeValue = "";
+                                    ServerVariableType VarType;
+                                    if (searchResults.Length > 0)
+                                    {
+                                        matricTypeValue = ObjToMatricType(searchResults[0].Field<int>("MatricType"));
+                                    }
+
+                                    if (matricTypeValue == "button")
+                                    {
+                                        VarType = ServerVariable.ServerVariableType.BOOL;
+                                    }
+                                    else
+                                    {
+                                        VarType = ServerVariable.ServerVariableType.STRING;
+                                    }
+                                    
+                                    //Console.WriteLine($"{innerKvp.Key} = {innerKvp.Value}");
+                                    //ServerVariable.ServerVariableType.STRING
                                     ServerVariable vString = new ServerVariable()
                                     {
+
                                         Name = innerKvp.Key,
-                                        VariableType = ServerVariable.ServerVariableType.STRING,
+                                        VariableType = VarType,
                                         Value = innerKvp.Value
                                     };
                                     variables.Add(vString);
                                 }
                             }
-
-                            matric.SetVariables(variables);
-
+                            if (matric != null) { 
+                                matric.SetVariables(variables);
+                            }
                         }
 
                         //DisplayDataDictionary();
@@ -758,7 +943,7 @@ namespace SimConnect2Matric2
                     break;
 
                 case "output_heading":
-                    output = Convert.ToString(Math.Round(rad2deg(_input)));
+                    output = Convert.ToString(Math.Round(Rad2deg(_input)));
                     break;
 
                 case "output_transponder":
@@ -774,6 +959,15 @@ namespace SimConnect2Matric2
                     }
                     break;
 
+                case "button":
+                    if (Math.Round(_input) == 1)
+                    {
+                        output = "true";
+                    }else{
+                        output = "false";
+                    }
+                    break;
+
                 default:
                     //default
                     break;
@@ -781,14 +975,74 @@ namespace SimConnect2Matric2
             return output;
         }
 
-
-        static double deg2rad(double deg)
+        static double Deg2rad(double deg)
         {
             return deg * (Math.PI / 180);
         }
-        static double rad2deg(double rad)
+        static double Rad2deg(double rad)
         {
             return rad * (180 / Math.PI);
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WriteLog("User Triggered XML Save");
+            SaveXML();
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadXML();
+        }
+
+        private void openAppDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory);
+        }
+
+        private void retrySimConnectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            simconnect = null;
+
+            WriteLog("Retrying SimConnect Connection");
+            RunSimConnect = true;
+            InitDataRequest();
+            SimConnectSetStatus(2);
+        }
+
+        private void retryMatricToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WriteLog("Retrying Matric Connection");
+            RunMatric = true;
+            InitMatric();
+            MatricSetStatus(2);
+        }
+
+        private void forceDataSyncToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveXML();
+            InitDataRequest();
+        }
+
+        private void viewSimVarsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://docs.flightsimulator.com/html/Programming_Tools/SimVars/Simulation_Variables.htm");
+        }
+
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://docs.google.com/document/d/1aluHcOkbjMNuti3EaJjW7r367VbIRYc-aW5vFRlapKk/edit?usp=sharing");
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://discord.com/channels/537764560791273472/748140032258342942");
+        }
+
+        private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            AboutForm AboutForm = new AboutForm();
+            AboutForm.ShowDialog();
         }
     }
 }

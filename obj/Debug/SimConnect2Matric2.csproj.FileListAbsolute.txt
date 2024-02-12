@@ -14,3 +14,4 @@ M:\Dropbox\Dropbox\Codey Things\Visual Studio\Projects\SimConnect2Matric2\bin\De
 M:\Dropbox\Dropbox\Codey Things\Visual Studio\Projects\SimConnect2Matric2\bin\Debug\MatricIntegration.pdb
 M:\Dropbox\Dropbox\Codey Things\Visual Studio\Projects\SimConnect2Matric2\bin\Debug\Newtonsoft.Json.dll
 M:\Dropbox\Dropbox\Codey Things\Visual Studio\Projects\SimConnect2Matric2\bin\Debug\Newtonsoft.Json.xml
+M:\Dropbox\Dropbox\Codey Things\Visual Studio\Projects\SimConnect2Matric2\obj\Debug\SimConnect2Matric2.AboutForm.resources

@@ -29,237 +29,265 @@ namespace SimConnect2Matric2
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnSimConnect = new System.Windows.Forms.Button();
-            this.btnMatric = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.buttonSave = new System.Windows.Forms.Button();
-            this.buttonLoad = new System.Windows.Forms.Button();
-            this.buttonSync = new System.Windows.Forms.Button();
-            this.buttonOpenSaveFile = new System.Windows.Forms.Button();
             this.textLog = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.labelSimConnectStatus = new System.Windows.Forms.Label();
-            this.labelMatricStatus = new System.Windows.Forms.Label();
-            this.labelMatricEnabled = new System.Windows.Forms.Label();
-            this.labelSimConnectEnabled = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openAppDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.retrySimConnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.retryMatricToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.forceDataSyncToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewSimVarsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusSimConnect = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripProgressBarSimConnect = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusMatric = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripProgressBarMatric = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.menuStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "SimConnect:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(40, 49);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(39, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Matric:";
-            // 
-            // btnSimConnect
-            // 
-            this.btnSimConnect.Location = new System.Drawing.Point(211, 15);
-            this.btnSimConnect.Name = "btnSimConnect";
-            this.btnSimConnect.Size = new System.Drawing.Size(124, 23);
-            this.btnSimConnect.TabIndex = 2;
-            this.btnSimConnect.Text = "Enable SimConnect";
-            this.btnSimConnect.UseVisualStyleBackColor = true;
-            this.btnSimConnect.Click += new System.EventHandler(this.BtnSimConnect_Click);
-            // 
-            // btnMatric
-            // 
-            this.btnMatric.Location = new System.Drawing.Point(211, 44);
-            this.btnMatric.Name = "btnMatric";
-            this.btnMatric.Size = new System.Drawing.Size(124, 23);
-            this.btnMatric.TabIndex = 3;
-            this.btnMatric.Text = "Enable Matric";
-            this.btnMatric.UseVisualStyleBackColor = true;
-            this.btnMatric.Click += new System.EventHandler(this.BtnMatric_Click);
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(327, 119);
+            this.dataGridView1.Location = new System.Drawing.Point(415, 12);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(668, 326);
+            this.dataGridView1.Size = new System.Drawing.Size(580, 419);
             this.dataGridView1.TabIndex = 10;
-            // 
-            // buttonSave
-            // 
-            this.buttonSave.Location = new System.Drawing.Point(508, 15);
-            this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(127, 52);
-            this.buttonSave.TabIndex = 11;
-            this.buttonSave.Text = "Save Data Items";
-            this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.ButtonSave_Click);
-            // 
-            // buttonLoad
-            // 
-            this.buttonLoad.Location = new System.Drawing.Point(661, 15);
-            this.buttonLoad.Name = "buttonLoad";
-            this.buttonLoad.Size = new System.Drawing.Size(127, 52);
-            this.buttonLoad.TabIndex = 12;
-            this.buttonLoad.Text = "Load Data Items";
-            this.buttonLoad.UseVisualStyleBackColor = true;
-            this.buttonLoad.Click += new System.EventHandler(this.ButtonLoad_Click);
-            // 
-            // buttonSync
-            // 
-            this.buttonSync.Location = new System.Drawing.Point(352, 15);
-            this.buttonSync.Name = "buttonSync";
-            this.buttonSync.Size = new System.Drawing.Size(127, 52);
-            this.buttonSync.TabIndex = 13;
-            this.buttonSync.Text = "Force Data Sync";
-            this.buttonSync.UseVisualStyleBackColor = true;
-            this.buttonSync.Click += new System.EventHandler(this.ButtonSync_Click);
-            // 
-            // buttonOpenSaveFile
-            // 
-            this.buttonOpenSaveFile.Location = new System.Drawing.Point(508, 73);
-            this.buttonOpenSaveFile.Name = "buttonOpenSaveFile";
-            this.buttonOpenSaveFile.Size = new System.Drawing.Size(127, 22);
-            this.buttonOpenSaveFile.TabIndex = 14;
-            this.buttonOpenSaveFile.Text = "Open Data Table XML";
-            this.buttonOpenSaveFile.UseVisualStyleBackColor = true;
-            this.buttonOpenSaveFile.Click += new System.EventHandler(this.ButtonOpenSaveFile_Click);
             // 
             // textLog
             // 
-            this.textLog.Location = new System.Drawing.Point(12, 119);
+            this.textLog.Location = new System.Drawing.Point(12, 27);
             this.textLog.MaxLength = 1024;
             this.textLog.Multiline = true;
             this.textLog.Name = "textLog";
             this.textLog.ReadOnly = true;
             this.textLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textLog.Size = new System.Drawing.Size(309, 326);
+            this.textLog.Size = new System.Drawing.Size(397, 404);
             this.textLog.TabIndex = 15;
             this.textLog.WordWrap = false;
             // 
-            // label3
+            // menuStrip1
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(83, 9);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(43, 13);
-            this.label3.TabIndex = 16;
-            this.label3.Text = "Status";
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.toolStripMenuItem2,
+            this.toolStripMenuItem1});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1001, 24);
+            this.menuStrip1.TabIndex = 22;
+            this.menuStrip1.Text = "menuStrip1";
             // 
-            // label4
+            // fileToolStripMenuItem
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(132, 9);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(60, 13);
-            this.label4.TabIndex = 17;
-            this.label4.Text = "Enabled?";
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem,
+            this.saveToolStripMenuItem,
+            this.openAppDirectoryToolStripMenuItem,
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
             // 
-            // labelSimConnectStatus
+            // openToolStripMenuItem
             // 
-            this.labelSimConnectStatus.AutoSize = true;
-            this.labelSimConnectStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSimConnectStatus.Location = new System.Drawing.Point(87, 25);
-            this.labelSimConnectStatus.Name = "labelSimConnectStatus";
-            this.labelSimConnectStatus.Size = new System.Drawing.Size(11, 13);
-            this.labelSimConnectStatus.TabIndex = 18;
-            this.labelSimConnectStatus.Text = "-";
-            this.labelSimConnectStatus.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.openToolStripMenuItem.Text = "Reload Data Items";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
-            // labelMatricStatus
+            // saveToolStripMenuItem
             // 
-            this.labelMatricStatus.AutoSize = true;
-            this.labelMatricStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelMatricStatus.Location = new System.Drawing.Point(87, 49);
-            this.labelMatricStatus.Name = "labelMatricStatus";
-            this.labelMatricStatus.Size = new System.Drawing.Size(11, 13);
-            this.labelMatricStatus.TabIndex = 19;
-            this.labelMatricStatus.Text = "-";
-            this.labelMatricStatus.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.saveToolStripMenuItem.Text = "Save Data Items";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
-            // labelMatricEnabled
+            // openAppDirectoryToolStripMenuItem
             // 
-            this.labelMatricEnabled.AutoSize = true;
-            this.labelMatricEnabled.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelMatricEnabled.Location = new System.Drawing.Point(140, 49);
-            this.labelMatricEnabled.Name = "labelMatricEnabled";
-            this.labelMatricEnabled.Size = new System.Drawing.Size(11, 13);
-            this.labelMatricEnabled.TabIndex = 21;
-            this.labelMatricEnabled.Text = "-";
-            this.labelMatricEnabled.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.openAppDirectoryToolStripMenuItem.Name = "openAppDirectoryToolStripMenuItem";
+            this.openAppDirectoryToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.openAppDirectoryToolStripMenuItem.Text = "Open App Directory";
+            this.openAppDirectoryToolStripMenuItem.Click += new System.EventHandler(this.openAppDirectoryToolStripMenuItem_Click);
             // 
-            // labelSimConnectEnabled
+            // exitToolStripMenuItem
             // 
-            this.labelSimConnectEnabled.AutoSize = true;
-            this.labelSimConnectEnabled.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSimConnectEnabled.Location = new System.Drawing.Point(140, 25);
-            this.labelSimConnectEnabled.Name = "labelSimConnectEnabled";
-            this.labelSimConnectEnabled.Size = new System.Drawing.Size(11, 13);
-            this.labelSimConnectEnabled.TabIndex = 20;
-            this.labelSimConnectEnabled.Text = "-";
-            this.labelSimConnectEnabled.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.retrySimConnectToolStripMenuItem,
+            this.retryMatricToolStripMenuItem,
+            this.forceDataSyncToolStripMenuItem});
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(59, 20);
+            this.toolStripMenuItem2.Text = "Actions";
+            // 
+            // retrySimConnectToolStripMenuItem
+            // 
+            this.retrySimConnectToolStripMenuItem.Name = "retrySimConnectToolStripMenuItem";
+            this.retrySimConnectToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.retrySimConnectToolStripMenuItem.Text = "Retry SimConnect";
+            this.retrySimConnectToolStripMenuItem.Click += new System.EventHandler(this.retrySimConnectToolStripMenuItem_Click);
+            // 
+            // retryMatricToolStripMenuItem
+            // 
+            this.retryMatricToolStripMenuItem.Name = "retryMatricToolStripMenuItem";
+            this.retryMatricToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.retryMatricToolStripMenuItem.Text = "Retry Matric";
+            this.retryMatricToolStripMenuItem.Click += new System.EventHandler(this.retryMatricToolStripMenuItem_Click);
+            // 
+            // forceDataSyncToolStripMenuItem
+            // 
+            this.forceDataSyncToolStripMenuItem.Name = "forceDataSyncToolStripMenuItem";
+            this.forceDataSyncToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.forceDataSyncToolStripMenuItem.Text = "Force Data Sync";
+            this.forceDataSyncToolStripMenuItem.Click += new System.EventHandler(this.forceDataSyncToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.helpToolStripMenuItem,
+            this.viewSimVarsToolStripMenuItem,
+            this.aboutToolStripMenuItem,
+            this.aboutToolStripMenuItem1});
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(44, 20);
+            this.toolStripMenuItem1.Text = "Help";
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.helpToolStripMenuItem.Text = "View Documentation";
+            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
+            // 
+            // viewSimVarsToolStripMenuItem
+            // 
+            this.viewSimVarsToolStripMenuItem.Name = "viewSimVarsToolStripMenuItem";
+            this.viewSimVarsToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.viewSimVarsToolStripMenuItem.Text = "View SimVars";
+            this.viewSimVarsToolStripMenuItem.Click += new System.EventHandler(this.viewSimVarsToolStripMenuItem_Click);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.aboutToolStripMenuItem.Text = "Open Discord";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // aboutToolStripMenuItem1
+            // 
+            this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
+            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(185, 22);
+            this.aboutToolStripMenuItem1.Text = "About";
+            this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.aboutToolStripMenuItem1_Click);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusSimConnect,
+            this.toolStripProgressBarSimConnect,
+            this.toolStripStatusMatric,
+            this.toolStripProgressBarMatric});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 435);
+            this.statusStrip1.Margin = new System.Windows.Forms.Padding(5);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1001, 22);
+            this.statusStrip1.TabIndex = 23;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusSimConnect
+            // 
+            this.toolStripStatusSimConnect.Name = "toolStripStatusSimConnect";
+            this.toolStripStatusSimConnect.Size = new System.Drawing.Size(110, 17);
+            this.toolStripStatusSimConnect.Text = "SimConnect Status:";
+            // 
+            // toolStripProgressBarSimConnect
+            // 
+            this.toolStripProgressBarSimConnect.BackColor = System.Drawing.Color.Silver;
+            this.toolStripProgressBarSimConnect.BorderStyle = System.Windows.Forms.Border3DStyle.Bump;
+            this.toolStripProgressBarSimConnect.ForeColor = System.Drawing.Color.Black;
+            this.toolStripProgressBarSimConnect.Name = "toolStripProgressBarSimConnect";
+            this.toolStripProgressBarSimConnect.Size = new System.Drawing.Size(37, 17);
+            this.toolStripProgressBarSimConnect.Text = "          ";
+            // 
+            // toolStripStatusMatric
+            // 
+            this.toolStripStatusMatric.Name = "toolStripStatusMatric";
+            this.toolStripStatusMatric.Size = new System.Drawing.Size(79, 17);
+            this.toolStripStatusMatric.Text = "Matric Status:";
+            // 
+            // toolStripProgressBarMatric
+            // 
+            this.toolStripProgressBarMatric.BackColor = System.Drawing.Color.Silver;
+            this.toolStripProgressBarMatric.BorderStyle = System.Windows.Forms.Border3DStyle.Bump;
+            this.toolStripProgressBarMatric.ForeColor = System.Drawing.Color.Black;
+            this.toolStripProgressBarMatric.Name = "toolStripProgressBarMatric";
+            this.toolStripProgressBarMatric.Size = new System.Drawing.Size(37, 17);
+            this.toolStripProgressBarMatric.Text = "          ";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1001, 457);
-            this.Controls.Add(this.labelMatricEnabled);
-            this.Controls.Add(this.labelSimConnectEnabled);
-            this.Controls.Add(this.labelMatricStatus);
-            this.Controls.Add(this.labelSimConnectStatus);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.textLog);
-            this.Controls.Add(this.buttonOpenSaveFile);
-            this.Controls.Add(this.buttonSync);
-            this.Controls.Add(this.buttonLoad);
-            this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.btnMatric);
-            this.Controls.Add(this.btnSimConnect);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "SimConnect 2 Matric 2";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnSimConnect;
-        private System.Windows.Forms.Button btnMatric;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button buttonSave;
-        private System.Windows.Forms.Button buttonLoad;
-        private System.Windows.Forms.Button buttonSync;
-        private System.Windows.Forms.Button buttonOpenSaveFile;
         public System.Windows.Forms.TextBox textLog;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        public System.Windows.Forms.Label labelSimConnectStatus;
-        public System.Windows.Forms.Label labelMatricStatus;
-        public System.Windows.Forms.Label labelMatricEnabled;
-        public System.Windows.Forms.Label labelSimConnectEnabled;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem openAppDirectoryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem retrySimConnectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem retryMatricToolStripMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusMatric;
+        public System.Windows.Forms.StatusStrip statusStrip1;
+        public System.Windows.Forms.ToolStripStatusLabel toolStripStatusSimConnect;
+        private System.Windows.Forms.ToolStripMenuItem forceDataSyncToolStripMenuItem;
+        public System.Windows.Forms.ToolStripStatusLabel toolStripProgressBarSimConnect;
+        public System.Windows.Forms.ToolStripStatusLabel toolStripProgressBarMatric;
+        private System.Windows.Forms.ToolStripMenuItem viewSimVarsToolStripMenuItem;
     }
 }
 

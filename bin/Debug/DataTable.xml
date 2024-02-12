@@ -22,40 +22,66 @@
     <DataItem>PLANE LATITUDE</DataItem>
     <DataType>3</DataType>
     <MatricType>1</MatricType>
+    <Value />
   </SimConnectDataTable>
   <SimConnectDataTable>
     <DataItem>PLANE LONGITUDE</DataItem>
     <DataType>3</DataType>
     <MatricType>1</MatricType>
+    <Value />
   </SimConnectDataTable>
   <SimConnectDataTable>
     <DataItem>PLANE ALTITUDE</DataItem>
     <DataType>1</DataType>
     <MatricType>0</MatricType>
+    <Value />
   </SimConnectDataTable>
   <SimConnectDataTable>
     <DataItem>PLANE HEADING DEGREES TRUE</DataItem>
     <DataType>2</DataType>
     <MatricType>3</MatricType>
+    <Value />
   </SimConnectDataTable>
   <SimConnectDataTable>
     <DataItem>TRANSPONDER CODE:1</DataItem>
     <DataType>0</DataType>
     <MatricType>5</MatricType>
+    <Value />
   </SimConnectDataTable>
   <SimConnectDataTable>
     <DataItem>COM STATUS:1</DataItem>
     <DataType>0</DataType>
     <MatricType>0</MatricType>
+    <Value />
   </SimConnectDataTable>
   <SimConnectDataTable>
     <DataItem>COM ACTIVE FREQUENCY:1</DataItem>
     <DataType>0</DataType>
     <MatricType>4</MatricType>
+    <Value />
   </SimConnectDataTable>
   <SimConnectDataTable>
     <DataItem>COM STANDBY FREQUENCY:1</DataItem>
     <DataType>0</DataType>
     <MatricType>4</MatricType>
+    <Value />
+  </SimConnectDataTable>
+  <SimConnectDataTable>
+    <DataItem>LIGHT TAXI</DataItem>
+    <DataType>0</DataType>
+    <MatricType>6</MatricType>
+    <Value />
+  </SimConnectDataTable>
+  <SimConnectDataTable>
+    <DataItem>LIGHT NAV</DataItem>
+    <DataType>0</DataType>
+    <MatricType>6</MatricType>
+    <Value />
+  </SimConnectDataTable>
+  <SimConnectDataTable>
+    <DataItem>LIGHT BEACON</DataItem>
+    <DataType>0</DataType>
+    <MatricType>6</MatricType>
+    <Value />
   </SimConnectDataTable>
 </NewDataSet>
