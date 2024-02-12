@@ -1141,3 +1141,703 @@
 00:57:35 - COM STATUS:1 changed from -1 to 2
 00:57:38 - PLANE LONGITUDE changed from 0 to 0.01
 00:57:38 - PLANE ALTITUDE changed from 0 to 4
+10:18:45 - Initialising DataGridView
+10:18:45 - Initialising DataTable
+10:18:45 - Binding DataTable to DataGridView
+10:18:45 - Checking for required applications
+10:18:45 - Found MatricServer
+10:18:45 - Initialising Matric
+10:18:45 - Matric: Getting Clients
+10:18:45 - Found FlightSimulator
+10:18:45 - Matric Found devices: Pixel 6 Pro
+10:18:45 - Initialising DataRequest
+10:18:45 - SimConnect DataRequest active
+10:18:45 - DataTable exists, will attempt to load XML.
+10:18:46 - DataTable loaded
+10:18:46 - SimConnect connection established
+10:18:46 - SimConnect recieved an error: SIMCONNECT_EXCEPTION_UNRECOGNIZED_ID
+10:18:46 - Initialising DataRequest
+10:18:46 - SimConnect DataRequest active
+10:18:46 - SimConnect connection established
+10:18:46 - PLANE LATITUDE changed from  to 54.22
+10:18:46 - PLANE LONGITUDE changed from  to -10.03
+10:18:46 - PLANE ALTITUDE changed from  to 105
+10:18:46 - PLANE HEADING DEGREES TRUE changed from  to 241
+10:18:46 - TRANSPONDER CODE:1 changed from  to 7000
+10:18:46 - COM STATUS:1 changed from  to 0
+10:18:46 - COM ACTIVE FREQUENCY:1 changed from  to 123.600
+10:18:46 - COM STANDBY FREQUENCY:1 changed from  to 124.850
+10:18:46 - LIGHT TAXI changed from  to false
+10:18:46 - LIGHT NAV changed from  to true
+10:18:46 - LIGHT BEACON changed from  to true
+10:19:09 - LIGHT TAXI changed from false to true
+10:19:11 - LIGHT TAXI changed from true to false
+10:19:12 - LIGHT TAXI changed from false to true
+10:19:15 - LIGHT TAXI changed from true to false
+10:19:16 - LIGHT NAV changed from true to false
+10:19:18 - LIGHT TAXI changed from false to true
+10:19:18 - LIGHT NAV changed from false to true
+10:20:10 - SimConnect connection lost
+10:20:10 - MSFS was closed unexpectedly
+10:20:10 - Checking for required applications
+10:20:10 - Found FlightSimulator
+10:20:10 - Initialising DataRequest
+10:20:10 - MSFS isn't running, or it's running and the SDK/SimConnect isn't installed.
+10:20:10 - Will check again for required apps in 60 seconds
+10:20:10 - MSFS was closed unexpectedly
+10:27:52 - Initialising DataGridView
+10:27:52 - Initialising DataTable
+10:27:52 - Binding DataTable to DataGridView
+10:27:52 - Checking for required applications
+10:27:52 - Found MatricServer
+10:27:52 - Initialising Matric
+10:27:52 - Matric: Getting Clients
+10:27:52 - Found FlightSimulator
+10:27:52 - Initialising DataRequest
+10:27:52 - SimConnect DataRequest active
+10:27:52 - Will check again for required apps in 60 seconds
+10:27:52 - DataTable exists, will attempt to load XML.
+10:27:52 - DataTable loaded
+10:27:52 - Matric Found devices: Pixel 6 Pro
+10:27:52 - SimConnect connection established
+10:27:52 - SimConnect recieved an error: SIMCONNECT_EXCEPTION_UNRECOGNIZED_ID
+10:27:52 - Initialising DataRequest
+10:27:52 - SimConnect DataRequest active
+10:27:52 - SimConnect connection established
+10:27:52 - PLANE LATITUDE changed from  to 53.62
+10:27:52 - PLANE LONGITUDE changed from  to -10.21
+10:27:52 - PLANE ALTITUDE changed from  to 144
+10:27:52 - PLANE HEADING DEGREES TRUE changed from  to 190
+10:27:52 - TRANSPONDER CODE:1 changed from  to 7000
+10:27:52 - COM STATUS:1 changed from  to 0
+10:27:52 - COM ACTIVE FREQUENCY:1 changed from  to 122.900
+10:27:52 - COM STANDBY FREQUENCY:1 changed from  to 124.850
+10:27:52 - LIGHT TAXI changed from  to false
+10:27:52 - LIGHT NAV changed from  to true
+10:27:52 - LIGHT BEACON changed from  to true
+10:28:12 - LIGHT NAV changed from true to false
+10:28:15 - LIGHT NAV changed from false to true
+10:28:18 - LIGHT NAV changed from true to false
+10:28:52 - Checking for required applications
+10:29:27 - LIGHT TAXI changed from false to true
+10:29:29 - LIGHT TAXI changed from true to false
+10:29:31 - LIGHT TAXI changed from false to true
+10:29:32 - LIGHT TAXI changed from true to false
+10:48:19 - Initialising DataRequest
+10:48:19 - SimConnect DataRequest active
+10:48:19 - SimConnect connection established
+10:48:19 - PLANE LATITUDE changed from  to 53.62
+10:48:19 - PLANE LONGITUDE changed from  to -10.21
+10:48:19 - PLANE ALTITUDE changed from  to 144
+10:48:19 - PLANE HEADING DEGREES TRUE changed from  to 190
+10:48:19 - TRANSPONDER CODE:1 changed from  to 7000
+10:48:19 - COM STATUS:1 changed from  to 0
+10:48:19 - COM ACTIVE FREQUENCY:1 changed from  to 122.900
+10:48:19 - COM STANDBY FREQUENCY:1 changed from  to 124.850
+10:48:19 - LIGHT TAXI changed from  to false
+10:48:19 - LIGHT NAV changed from  to false
+10:48:19 - LIGHT BEACON changed from  to true
+10:48:37 - Initialising DataGridView
+10:48:37 - Initialising DataTable
+10:48:37 - Binding DataTable to DataGridView
+10:48:37 - Checking for required applications
+10:48:37 - Found MatricServer
+10:48:37 - Initialising Matric
+10:48:37 - Matric: Getting Clients
+10:48:38 - Found FlightSimulator
+10:48:38 - Matric Found devices: Pixel 6 Pro
+10:48:38 - Initialising DataRequest
+10:48:38 - SimConnect DataRequest active
+10:48:38 - DataTable exists, will attempt to load XML.
+10:48:38 - DataTable loaded
+10:48:38 - SimConnect connection established
+10:48:38 - SimConnect recieved an error: SIMCONNECT_EXCEPTION_UNRECOGNIZED_ID
+10:48:38 - Initialising DataRequest
+10:48:38 - SimConnect DataRequest active
+10:48:38 - SimConnect connection established
+10:48:38 - PLANE LATITUDE changed from  to 53.62
+10:48:38 - PLANE LONGITUDE changed from  to -10.21
+10:48:38 - PLANE ALTITUDE changed from  to 144
+10:48:38 - PLANE HEADING DEGREES TRUE changed from  to 190
+10:48:38 - TRANSPONDER CODE:1 changed from  to 7000
+10:48:38 - COM STATUS:1 changed from  to 0
+10:48:38 - COM ACTIVE FREQUENCY:1 changed from  to 122.900
+10:48:38 - COM STANDBY FREQUENCY:1 changed from  to 124.850
+10:48:38 - LIGHT TAXI changed from  to false
+10:48:38 - LIGHT NAV changed from  to false
+10:48:38 - LIGHT BEACON changed from  to true
+10:48:47 - LIGHT TAXI changed from false to true
+10:48:49 - LIGHT TAXI changed from true to false
+10:49:05 - LIGHT TAXI changed from false to true
+10:49:06 - LIGHT TAXI changed from true to false
+10:49:07 - LIGHT TAXI changed from false to true
+10:49:07 - LIGHT TAXI changed from true to false
+11:14:22 - Initialising DataRequest
+11:14:22 - SimConnect DataRequest active
+11:14:22 - SimConnect connection established
+11:14:22 - PLANE LATITUDE changed from  to 53.62
+11:14:22 - PLANE LONGITUDE changed from  to -10.21
+11:14:22 - PLANE ALTITUDE changed from  to 144
+11:14:22 - PLANE HEADING DEGREES TRUE changed from  to 190
+11:14:22 - TRANSPONDER CODE:1 changed from  to 7000
+11:14:22 - COM STATUS:1 changed from  to 0
+11:14:22 - COM ACTIVE FREQUENCY:1 changed from  to 122.900
+11:14:22 - COM STANDBY FREQUENCY:1 changed from  to 124.850
+11:14:22 - LIGHT TAXI changed from  to false
+11:14:22 - LIGHT NAV changed from  to false
+11:14:22 - LIGHT BEACON changed from  to true
+11:15:24 - LIGHT TAXI changed from false to true
+11:15:25 - LIGHT TAXI changed from true to false
+11:15:25 - LIGHT TAXI changed from false to true
+11:15:46 - LIGHT TAXI changed from true to false
+11:22:44 - LIGHT NAV changed from false to true
+11:23:27 - LIGHT NAV changed from true to false
+11:23:29 - LIGHT NAV changed from false to true
+11:23:30 - LIGHT NAV changed from true to false
+11:23:31 - LIGHT NAV changed from false to true
+11:23:48 - LIGHT NAV changed from true to false
+11:23:49 - LIGHT NAV changed from false to true
+11:23:55 - LIGHT NAV changed from true to false
+11:24:31 - LIGHT NAV changed from false to true
+11:27:18 - LIGHT NAV changed from true to false
+11:27:20 - LIGHT NAV changed from false to true
+11:27:21 - LIGHT TAXI changed from false to true
+11:27:21 - LIGHT TAXI changed from true to false
+11:27:22 - LIGHT TAXI changed from false to true
+11:27:23 - LIGHT TAXI changed from true to false
+11:27:24 - LIGHT NAV changed from true to false
+11:27:24 - LIGHT NAV changed from false to true
+11:27:25 - LIGHT TAXI changed from false to true
+11:27:26 - LIGHT TAXI changed from true to false
+11:27:26 - LIGHT NAV changed from true to false
+11:27:27 - LIGHT NAV changed from false to true
+11:27:27 - LIGHT TAXI changed from false to true
+11:27:35 - LIGHT NAV changed from true to false
+11:27:37 - LIGHT NAV changed from false to true
+11:27:38 - LIGHT TAXI changed from true to false
+11:27:39 - LIGHT TAXI changed from false to true
+11:27:39 - LIGHT NAV changed from true to false
+11:27:40 - LIGHT NAV changed from false to true
+11:27:47 - LIGHT NAV changed from true to false
+11:27:47 - LIGHT TAXI changed from true to false
+11:27:50 - LIGHT TAXI changed from false to true
+11:27:51 - LIGHT TAXI changed from true to false
+11:27:51 - LIGHT NAV changed from false to true
+11:27:52 - LIGHT NAV changed from true to false
+11:27:52 - LIGHT TAXI changed from false to true
+11:27:53 - LIGHT NAV changed from false to true
+11:27:53 - LIGHT NAV changed from true to false
+11:27:54 - LIGHT TAXI changed from true to false
+11:29:07 - LIGHT TAXI changed from false to true
+11:29:09 - LIGHT TAXI changed from true to false
+11:29:10 - LIGHT NAV changed from false to true
+11:29:12 - LIGHT NAV changed from true to false
+11:30:04 - Retrying SimConnect Connection
+11:30:04 - Initialising DataRequest
+11:30:04 - SimConnect DataRequest active
+11:30:04 - SimConnect connection established
+11:30:05 - Initialising DataRequest
+11:30:05 - SimConnect DataRequest active
+11:30:05 - SimConnect connection established
+11:30:05 - PLANE LATITUDE changed from  to 53.62
+11:30:05 - PLANE LONGITUDE changed from  to -10.21
+11:30:05 - PLANE ALTITUDE changed from  to 144
+11:30:05 - PLANE HEADING DEGREES TRUE changed from  to 190
+11:30:05 - TRANSPONDER CODE:1 changed from  to 7000
+11:30:05 - COM STATUS:1 changed from  to 0
+11:30:05 - COM ACTIVE FREQUENCY:1 changed from  to 122.900
+11:30:05 - COM STANDBY FREQUENCY:1 changed from  to 124.850
+11:30:05 - LIGHT TAXI changed from  to false
+11:30:05 - LIGHT NAV changed from  to false
+11:30:05 - LIGHT BEACON changed from  to true
+11:30:11 - LIGHT NAV changed from false to true
+11:30:12 - LIGHT NAV changed from true to false
+11:30:12 - LIGHT TAXI changed from false to true
+11:30:13 - LIGHT TAXI changed from true to false
+11:30:14 - LIGHT NAV changed from false to true
+11:30:14 - LIGHT TAXI changed from false to true
+11:30:14 - LIGHT NAV changed from true to false
+11:30:15 - LIGHT TAXI changed from true to false
+11:30:17 - LIGHT TAXI changed from false to true
+11:30:18 - LIGHT TAXI changed from true to false
+11:30:19 - LIGHT NAV changed from false to true
+11:30:19 - LIGHT NAV changed from true to false
+11:30:20 - LIGHT NAV changed from false to true
+11:30:20 - LIGHT NAV changed from true to false
+11:32:53 - LIGHT TAXI changed from false to true
+11:32:54 - LIGHT NAV changed from false to true
+11:34:05 - LIGHT TAXI changed from true to false
+11:34:05 - LIGHT NAV changed from true to false
+11:34:05 - LIGHT NAV changed from false to true
+11:34:06 - LIGHT TAXI changed from false to true
+11:34:23 - Matric Error: System.Net.Sockets.SocketException (0x80004005): An existing connection was forcibly closed by the remote host
+   at System.Net.Sockets.Socket.EndReceiveFrom(IAsyncResult asyncResult, EndPoint& endPoint)
+   at System.Net.Sockets.UdpClient.EndReceive(IAsyncResult asyncResult, IPEndPoint& remoteEP)
+   at Matric.Integration.Matric.ReceiveCallback(IAsyncResult ar) in E:\Projects\matric-pro\Integration\MatricIntegrationLib\Matric.cs:line 132
+11:35:10 - Initialising DataRequest
+11:35:10 - SimConnect DataRequest active
+11:35:10 - SimConnect connection established
+11:35:10 - PLANE LATITUDE changed from  to 53.62
+11:35:10 - PLANE LONGITUDE changed from  to -10.21
+11:35:10 - PLANE ALTITUDE changed from  to 144
+11:35:10 - PLANE HEADING DEGREES TRUE changed from  to 190
+11:35:10 - TRANSPONDER CODE:1 changed from  to 7000
+11:35:10 - COM STATUS:1 changed from  to 0
+11:35:10 - COM ACTIVE FREQUENCY:1 changed from  to 122.900
+11:35:10 - COM STANDBY FREQUENCY:1 changed from  to 124.850
+11:35:10 - LIGHT TAXI changed from  to true
+11:35:10 - LIGHT NAV changed from  to true
+11:35:10 - LIGHT BEACON changed from  to true
+11:35:14 - Initialising DataRequest
+11:35:14 - SimConnect DataRequest active
+11:35:14 - SimConnect connection established
+11:35:14 - PLANE LATITUDE changed from  to 53.62
+11:35:14 - PLANE LONGITUDE changed from  to -10.21
+11:35:14 - PLANE ALTITUDE changed from  to 144
+11:35:14 - PLANE HEADING DEGREES TRUE changed from  to 190
+11:35:14 - TRANSPONDER CODE:1 changed from  to 7000
+11:35:14 - COM STATUS:1 changed from  to 0
+11:35:14 - COM ACTIVE FREQUENCY:1 changed from  to 122.900
+11:35:14 - COM STANDBY FREQUENCY:1 changed from  to 124.850
+11:35:14 - LIGHT TAXI changed from  to true
+11:35:14 - LIGHT NAV changed from  to true
+11:35:14 - LIGHT BEACON changed from  to true
+11:35:23 - User exit, disposing of connection
+11:35:30 - Initialising DataGridView
+11:35:30 - Initialising DataTable
+11:35:30 - Binding DataTable to DataGridView
+11:35:30 - Checking for required applications
+11:35:30 - Found MatricServer
+11:35:30 - Initialising Matric
+11:35:30 - Matric: Getting Clients
+11:35:30 - Found FlightSimulator
+11:35:30 - Initialising DataRequest
+11:35:30 - Matric Found devices: Pixel 6 Pro
+11:35:30 - SimConnect DataRequest active
+11:35:30 - DataTable exists, will attempt to load XML.
+11:35:30 - DataTable loaded
+11:35:30 - SimConnect connection established
+11:35:30 - SimConnect recieved an error: SIMCONNECT_EXCEPTION_UNRECOGNIZED_ID
+11:35:30 - Initialising DataRequest
+11:35:30 - SimConnect DataRequest active
+11:35:30 - SimConnect connection established
+11:35:30 - PLANE LATITUDE changed from  to 53.62
+11:35:30 - PLANE LONGITUDE changed from  to -10.21
+11:35:30 - PLANE ALTITUDE changed from  to 144
+11:35:30 - PLANE HEADING DEGREES TRUE changed from  to 190
+11:35:30 - TRANSPONDER CODE:1 changed from  to 7000
+11:35:30 - COM STATUS:1 changed from  to 0
+11:35:30 - COM ACTIVE FREQUENCY:1 changed from  to 122.900
+11:35:30 - COM STANDBY FREQUENCY:1 changed from  to 124.850
+11:35:30 - LIGHT TAXI changed from  to true
+11:35:30 - LIGHT NAV changed from  to true
+11:35:30 - LIGHT BEACON changed from  to true
+11:35:40 - LIGHT TAXI changed from true to false
+11:35:41 - LIGHT NAV changed from true to false
+11:37:45 - Initialising DataGridView
+11:37:45 - Initialising DataTable
+11:37:45 - Binding DataTable to DataGridView
+11:37:45 - Checking for required applications
+11:37:45 - Found MatricServer
+11:37:45 - Initialising Matric
+11:37:45 - Matric: Getting Clients
+11:37:45 - Found FlightSimulator
+11:37:45 - Matric Found devices: Pixel 6 Pro
+11:37:45 - SimConnect DataRequest active
+11:37:45 - DataTable exists, will attempt to load XML.
+11:37:45 - DataTable loaded
+11:37:45 - SimConnect connection established
+11:37:45 - SimConnect recieved an error: SIMCONNECT_EXCEPTION_UNRECOGNIZED_ID
+11:37:45 - Initialising DataRequest
+11:37:45 - SimConnect DataRequest active
+11:37:45 - SimConnect connection established
+11:37:45 - PLANE LATITUDE changed from  to 53.62
+11:37:45 - PLANE LONGITUDE changed from  to -10.21
+11:37:45 - PLANE ALTITUDE changed from  to 144
+11:37:45 - PLANE HEADING DEGREES TRUE changed from  to 190
+11:37:45 - TRANSPONDER CODE:1 changed from  to 7000
+11:37:45 - COM STATUS:1 changed from  to 0
+11:37:45 - COM ACTIVE FREQUENCY:1 changed from  to 122.900
+11:37:45 - COM STANDBY FREQUENCY:1 changed from  to 124.850
+11:37:45 - LIGHT TAXI changed from  to false
+11:37:45 - LIGHT NAV changed from  to false
+11:37:45 - LIGHT BEACON changed from  to true
+11:37:57 - Initialising DataGridView
+11:37:57 - Initialising DataTable
+11:37:57 - Binding DataTable to DataGridView
+11:37:57 - Checking for required applications
+11:37:57 - Found MatricServer
+11:37:57 - Initialising Matric
+11:37:57 - Matric: Getting Clients
+11:37:57 - Found FlightSimulator
+11:37:57 - Matric Found devices: Pixel 6 Pro
+11:37:57 - SimConnect DataRequest active
+11:37:57 - DataTable exists, will attempt to load XML.
+11:37:57 - DataTable loaded
+11:37:57 - SimConnect connection established
+11:37:57 - SimConnect recieved an error: SIMCONNECT_EXCEPTION_UNRECOGNIZED_ID
+11:37:57 - Initialising DataRequest
+11:37:57 - SimConnect DataRequest active
+11:37:57 - SimConnect connection established
+11:37:57 - PLANE LATITUDE changed from  to 53.62
+11:37:57 - PLANE LONGITUDE changed from  to -10.21
+11:37:57 - PLANE ALTITUDE changed from  to 144
+11:37:57 - PLANE HEADING DEGREES TRUE changed from  to 190
+11:37:57 - TRANSPONDER CODE:1 changed from  to 7000
+11:37:57 - COM STATUS:1 changed from  to 0
+11:37:57 - COM ACTIVE FREQUENCY:1 changed from  to 122.900
+11:37:57 - COM STANDBY FREQUENCY:1 changed from  to 124.850
+11:37:57 - LIGHT TAXI changed from  to false
+11:37:57 - LIGHT NAV changed from  to false
+11:37:57 - LIGHT BEACON changed from  to true
+11:38:01 - LIGHT TAXI changed from false to true
+11:38:02 - LIGHT NAV changed from false to true
+11:38:02 - LIGHT NAV changed from true to false
+11:38:03 - LIGHT TAXI changed from true to false
+11:38:17 - LIGHT TAXI changed from false to true
+11:39:26 - LIGHT TAXI changed from true to false
+11:39:27 - LIGHT NAV changed from false to true
+11:39:27 - LIGHT TAXI changed from false to true
+11:39:27 - LIGHT NAV changed from true to false
+11:39:28 - LIGHT TAXI changed from true to false
+11:39:44 - LIGHT TAXI changed from false to true
+11:39:45 - LIGHT NAV changed from false to true
+11:39:46 - LIGHT NAV changed from true to false
+11:39:46 - LIGHT TAXI changed from true to false
+11:41:59 - PLANE HEADING DEGREES TRUE changed from 190 to 191
+11:41:59 - PLANE HEADING DEGREES TRUE changed from 191 to 190
+11:41:59 - PLANE HEADING DEGREES TRUE changed from 190 to 191
+11:52:28 - SimConnect connection lost
+11:52:29 - MSFS was closed unexpectedly
+11:52:29 - Checking for required applications
+11:52:29 - Found FlightSimulator
+11:52:29 - Initialising DataRequest
+11:52:29 - MSFS isn't running, or it's running and the SDK/SimConnect isn't installed.
+11:52:29 - Will check again for required apps in 60 seconds
+11:52:29 - User exit, disposing of connection
+11:57:09 - Initialising DataGridView
+11:57:09 - Initialising DataTable
+11:57:09 - Binding DataTable to DataGridView
+11:57:09 - Checking for required applications
+11:57:09 - Found MatricServer
+11:57:09 - Initialising Matric
+11:57:09 - Matric: Getting Clients
+11:57:09 - Matric: No connected devices found
+11:57:39 - Initialising DataGridView
+11:57:39 - Initialising DataTable
+11:57:39 - Binding DataTable to DataGridView
+11:57:39 - Checking for required applications
+11:57:39 - Found MatricServer
+11:57:39 - Initialising Matric
+11:57:39 - Matric: Getting Clients
+11:57:39 - FlightSimulator is not running
+11:57:39 - Will check again for required apps in 60 seconds
+11:57:39 - DataTable exists, will attempt to load XML.
+11:57:39 - DataTable loaded
+11:57:43 - User exit, disposing of connection
+13:30:37 - Initialising DataGridView
+13:30:37 - Initialising DataTable
+13:30:37 - Binding DataTable to DataGridView
+13:30:37 - Checking for required applications
+13:30:37 - Found MatricServer
+13:30:37 - Initialising Matric
+13:30:37 - Matric: Getting Clients
+13:30:37 - Matric: No connected devices found
+13:30:37 - Will check again for required apps in 60 seconds
+13:30:37 - DataTable exists, will attempt to load XML.
+13:30:37 - DataTable loaded
+13:31:37 - Checking for required applications
+13:31:37 - FlightSimulator is not running
+13:31:37 - Will check again for required apps in 60 seconds
+13:33:56 - Initialising DataGridView
+13:33:56 - Initialising DataTable
+13:33:56 - Binding DataTable to DataGridView
+13:33:56 - Checking for required applications
+13:33:56 - Found MatricServer
+13:33:56 - Initialising Matric
+13:33:56 - Matric: Getting Clients
+13:33:56 - Matric: No connected devices found
+13:34:12 - Initialising DataGridView
+13:34:12 - Initialising DataTable
+13:34:12 - Binding DataTable to DataGridView
+13:34:12 - Checking for required applications
+13:34:12 - Found MatricServer
+13:34:12 - Initialising Matric
+13:34:12 - Matric: Getting Clients
+13:34:12 - Matric: No connected devices found
+13:34:12 - Will check again for required apps in 60 seconds
+13:34:12 - DataTable exists, will attempt to load XML.
+13:34:12 - DataTable loaded
+13:34:18 - User exit, disposing of connection
+13:58:55 - Initialising DataGridView
+13:58:55 - Initialising DataTable
+13:58:55 - Binding DataTable to DataGridView
+13:58:55 - Checking for required applications
+13:58:55 - Found MatricServer
+13:58:55 - Initialising Matric
+13:58:55 - Matric: Getting Clients
+13:58:55 - Matric: No connected devices found
+13:59:02 - Initialising DataGridView
+13:59:02 - Initialising DataTable
+13:59:02 - Binding DataTable to DataGridView
+13:59:02 - Checking for required applications
+13:59:02 - Found MatricServer
+13:59:02 - Initialising Matric
+13:59:02 - Matric: Getting Clients
+13:59:02 - Matric: No connected devices found
+13:59:02 - FlightSimulator is not running
+13:59:02 - Will check again for required apps in 60 seconds
+13:59:02 - DataTable exists, will attempt to load XML.
+13:59:02 - DataTable loaded
+14:04:07 - Initialising DataGridView
+14:04:07 - Initialising DataTable
+14:04:07 - Binding DataTable to DataGridView
+14:04:07 - Checking for required applications
+14:04:07 - Found MatricServer
+14:04:07 - Initialising Matric
+14:04:07 - Matric: Getting Clients
+14:04:07 - FlightSimulator is not running
+14:04:07 - Will check again for required apps in 60 seconds
+14:04:07 - DataTable exists, will attempt to load XML.
+14:04:07 - DataTable loaded
+14:05:05 - User exit, disposing of connection
+14:06:20 - Initialising DataGridView
+14:06:20 - Initialising DataTable
+14:06:20 - Binding DataTable to DataGridView
+14:06:20 - Checking for required applications
+14:06:21 - Found MatricServer
+14:06:21 - Initialising Matric
+14:06:21 - Matric: Getting Clients
+14:06:21 - Matric: No connected devices found
+14:06:24 - Initialising DataGridView
+14:06:24 - Initialising DataTable
+14:06:24 - Binding DataTable to DataGridView
+14:06:24 - Checking for required applications
+14:06:24 - Found MatricServer
+14:06:24 - Initialising Matric
+14:06:24 - Matric: Getting Clients
+14:06:24 - Matric: No connected devices found
+14:06:27 - Initialising DataGridView
+14:06:27 - Initialising DataTable
+14:06:27 - Binding DataTable to DataGridView
+14:06:27 - Checking for required applications
+14:06:27 - Found MatricServer
+14:06:27 - Initialising Matric
+14:06:27 - Matric: Getting Clients
+14:06:27 - Matric: No connected devices found
+14:07:58 - Initialising DataGridView
+14:07:58 - Initialising DataTable
+14:07:58 - Binding DataTable to DataGridView
+14:07:58 - Checking for required applications
+14:07:58 - Found MatricServer
+14:07:58 - Initialising Matric
+14:07:58 - Matric: Getting Clients
+14:07:58 - Matric: No connected devices found
+14:07:58 - FlightSimulator is not running
+14:07:58 - Will check again for required apps in 60 seconds
+14:07:58 - DataTable exists, will attempt to load XML.
+14:07:58 - DataTable loaded
+14:08:14 - User exit, disposing of connection
+14:10:28 - Initialising DataGridView
+14:10:28 - Initialising DataTable
+14:10:28 - Binding DataTable to DataGridView
+14:10:28 - Checking for required applications
+14:10:28 - Found MatricServer
+14:10:28 - Initialising Matric
+14:10:28 - Matric: Getting Clients
+14:10:28 - Matric: No connected devices found
+14:10:28 - Log file current not accessible
+14:10:28 - Will check again for required apps in 60 seconds
+14:10:28 - DataTable exists, will attempt to load XML.
+14:10:28 - DataTable loaded
+14:20:46 - Initialising DataGridView
+14:20:46 - Initialising DataTable
+14:20:46 - Binding DataTable to DataGridView
+14:20:46 - Checking for required applications
+14:20:46 - Found MatricServer
+14:20:46 - Initialising Matric
+14:20:46 - Matric: Getting Clients
+14:20:46 - Matric: No connected devices found
+14:20:46 - FlightSimulator is not running
+14:20:46 - Will check again for required apps in 60 seconds
+14:20:46 - DataTable exists, will attempt to load XML.
+14:20:46 - DataTable loaded
+14:21:55 - Initialising DataGridView
+14:21:55 - Initialising DataTable
+14:21:55 - Binding DataTable to DataGridView
+14:21:55 - Checking for required applications
+14:21:55 - Found MatricServer
+14:21:55 - Initialising Matric
+14:21:55 - Matric: Getting Clients
+14:21:55 - Matric: No connected devices found
+14:21:55 - Will check again for required apps in 60 seconds
+14:21:55 - DataTable exists, will attempt to load XML.
+14:21:55 - DataTable loaded
+14:23:02 - Initialising DataGridView
+14:23:02 - Initialising DataTable
+14:23:02 - Binding DataTable to DataGridView
+14:23:02 - Checking for required applications
+14:23:02 - Found MatricServer
+14:23:02 - Initialising Matric
+14:23:02 - Matric: Getting Clients
+14:23:02 - Matric: No connected devices found
+14:23:02 - FlightSimulator is not running
+14:23:02 - Will check again for required apps in 60 seconds
+14:23:02 - DataTable exists, will attempt to load XML.
+14:23:02 - DataTable loaded
+14:23:08 - User exit, disposing of connection
+14:24:28 - Initialising DataGridView
+14:24:28 - Initialising DataTable
+14:24:28 - Binding DataTable to DataGridView
+14:24:28 - Checking for required applications
+14:24:28 - Found MatricServer
+14:24:28 - Initialising Matric
+14:24:28 - Matric: Getting Clients
+14:24:28 - Matric: No connected devices found
+14:24:28 - Log file current not accessible
+14:24:28 - Will check again for required apps in 60 seconds
+14:24:28 - DataTable exists, will attempt to load XML.
+14:24:28 - DataTable loaded
+14:24:44 - User exit, disposing of connection
+14:24:46 - Initialising DataGridView
+14:24:46 - Initialising DataTable
+14:24:46 - Binding DataTable to DataGridView
+14:24:46 - Checking for required applications
+14:24:46 - Found MatricServer
+14:24:46 - Initialising Matric
+14:24:46 - Matric: Getting Clients
+14:24:46 - Matric: No connected devices found
+14:24:46 - Will check again for required apps in 60 seconds
+14:24:46 - DataTable exists, will attempt to load XML.
+14:24:46 - DataTable loaded
+14:24:47 - User exit, disposing of connection
+14:25:41 - Initialising DataGridView
+14:25:41 - Initialising DataTable
+14:25:41 - Binding DataTable to DataGridView
+14:25:41 - Checking for required applications
+14:25:41 - Found MatricServer
+14:25:41 - Initialising Matric
+14:25:41 - Matric: Getting Clients
+14:25:41 - Matric: No connected devices found
+14:25:41 - Will check again for required apps in 60 seconds
+14:25:41 - DataTable exists, will attempt to load XML.
+14:25:41 - DataTable loaded
+14:26:14 - Initialising DataGridView
+14:26:14 - Initialising DataTable
+14:26:14 - Binding DataTable to DataGridView
+14:26:14 - Checking for required applications
+14:26:14 - Found MatricServer
+14:26:14 - Initialising Matric
+14:26:14 - Matric: Getting Clients
+14:26:14 - Matric: No connected devices found
+14:26:14 - Will check again for required apps in 60 seconds
+14:26:14 - DataTable exists, will attempt to load XML.
+14:26:14 - DataTable loaded
+14:26:22 - User exit, disposing of connection
+14:26:41 - Initialising DataGridView
+14:26:41 - Initialising DataTable
+14:26:41 - Binding DataTable to DataGridView
+14:26:41 - Checking for required applications
+14:26:41 - Found MatricServer
+14:26:41 - Initialising Matric
+14:26:41 - Matric: Getting Clients
+14:26:41 - Matric: No connected devices found
+14:26:41 - Log file current not accessible
+14:26:41 - Will check again for required apps in 60 seconds
+14:26:41 - DataTable exists, will attempt to load XML.
+14:26:41 - DataTable loaded
+14:26:54 - User exit, disposing of connection
+14:28:45 - Initialising DataGridView
+14:28:45 - Initialising DataTable
+14:28:45 - Binding DataTable to DataGridView
+14:28:45 - Checking for required applications
+14:28:45 - Found MatricServer
+14:28:45 - Initialising Matric
+14:28:45 - Matric: Getting Clients
+14:28:45 - Matric: No connected devices found
+14:28:45 - Log file current not accessible
+14:28:45 - Will check again for required apps in 60 seconds
+14:28:45 - DataTable exists, will attempt to load XML.
+14:28:45 - DataTable loaded
+14:33:12 - Initialising DataGridView
+14:33:12 - Initialising DataTable
+14:33:12 - Binding DataTable to DataGridView
+14:33:12 - Checking for required applications
+14:33:12 - Found MatricServer
+14:33:12 - Initialising Matric
+14:33:12 - Matric: Getting Clients
+14:33:13 - Matric: No connected devices found
+14:33:13 - Log file current not accessible
+14:33:13 - Will check again for required apps in 60 seconds
+14:33:13 - DataTable exists, will attempt to load XML.
+14:33:13 - DataTable loaded
+14:34:18 - Initialising DataGridView
+14:34:18 - Initialising DataTable
+14:34:18 - Binding DataTable to DataGridView
+14:34:18 - Checking for required applications
+14:34:18 - Found MatricServer
+14:34:18 - Initialising Matric
+14:34:18 - Matric: Getting Clients
+14:34:18 - FlightSimulator is not running
+14:34:18 - Will check again for required apps in 60 seconds
+14:34:18 - DataTable exists, will attempt to load XML.
+14:34:18 - DataTable loaded
+14:34:26 - User exit, disposing of connection
+14:35:31 - Initialising DataGridView
+14:35:31 - Initialising DataTable
+14:35:31 - Binding DataTable to DataGridView
+14:35:31 - Checking for required applications
+14:35:31 - Found MatricServer
+14:35:31 - Initialising Matric
+14:35:31 - Matric: Getting Clients
+14:35:31 - FlightSimulator is not running
+14:35:31 - Will check again for required apps in 60 seconds
+14:35:31 - DataTable exists, will attempt to load XML.
+14:35:31 - DataTable loaded
+14:35:41 - User exit, disposing of connection
+14:35:55 - Initialising DataGridView
+14:35:55 - Initialising DataTable
+14:35:55 - Binding DataTable to DataGridView
+14:35:55 - Checking for required applications
+14:35:55 - Found MatricServer
+14:35:55 - Initialising Matric
+14:35:55 - Matric: Getting Clients
+14:35:55 - FlightSimulator is not running
+14:35:55 - Will check again for required apps in 60 seconds
+14:35:55 - DataTable exists, will attempt to load XML.
+14:35:55 - DataTable loaded
+14:36:00 - User exit, disposing of connection
+14:36:06 - Initialising DataGridView
+14:36:06 - Initialising DataTable
+14:36:06 - Binding DataTable to DataGridView
+14:36:06 - Checking for required applications
+14:36:06 - Found MatricServer
+14:36:06 - Initialising Matric
+14:36:06 - Matric: Getting Clients
+14:36:06 - Matric: No connected devices found
+14:36:06 - Will check again for required apps in 60 seconds
+14:36:06 - DataTable exists, will attempt to load XML.
+14:36:06 - DataTable loaded
+14:36:10 - User exit, disposing of connection
+14:41:22 - Initialising DataGridView
+14:41:22 - Initialising DataTable
+14:41:22 - Binding DataTable to DataGridView
+14:41:22 - Checking for required applications
+14:41:22 - Found MatricServer
+14:41:22 - Initialising Matric
+14:41:22 - Matric: Getting Clients
+14:41:22 - FlightSimulator is not running
+14:41:22 - Will check again for required apps in 60 seconds
+14:41:22 - DataTable exists, will attempt to load XML.
+14:41:22 - DataTable loaded
+14:44:10 - Initialising DataGridView
+14:44:10 - Initialising DataTable
+14:44:10 - Binding DataTable to DataGridView
+14:44:10 - Checking for required applications
+14:44:10 - Found MatricServer
+14:44:10 - Initialising Matric
+14:44:10 - Matric: Getting Clients
+14:44:10 - Matric: No connected devices found
+14:44:10 - Will check again for required apps in 60 seconds
+14:44:10 - DataTable exists, will attempt to load XML.
+14:44:10 - DataTable loaded

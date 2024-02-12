@@ -400,26 +400,33 @@ namespace SimConnect2Matric2
                     // Convert bytes to kilobytes or megabytes for better readability
                     double fileSizeInKB = fileSizeInBytes / 1024.0; // Bytes to Kilobytes
 
-                    string[] lines = File.ReadAllLines(logFilePath);
-
-                    if (fileSizeInKB > MAX_LOG_SIZE)
-                    {
-                        // Skip the first line and get the remaining lines
-                        lines = lines.Skip(50).ToArray();
-                    }
-                    lines = lines.Concat(new[] { currentTimeFormatted + " - " + newline }).ToArray();
-                    Console.WriteLine(currentTimeFormatted + " - " + newline);
                     try
                     {
-                        File.WriteAllLines(logFilePath, lines);
+                        string[] lines = File.ReadAllLines(logFilePath);
+                        if (fileSizeInKB > MAX_LOG_SIZE)
+                        {
+                            // Skip the first line and get the remaining lines
+                            lines = lines.Skip(50).ToArray();
+                        }
+                        lines = lines.Concat(new[] { currentTimeFormatted + " - " + newline }).ToArray();
+                        Console.WriteLine(currentTimeFormatted + " - " + newline);
+                        try
+                        {
+                            File.WriteAllLines(logFilePath, lines);
 
+                        }
+                        catch (IOException ex)
+                        {
+                            // Handle the case where the file is in use
+                            Console.WriteLine($"Error writing to the file: {ex.Message}");
+                        }
+                        LoadLogFile();
                     }
-                    catch (IOException ex)
-                    {
-                        // Handle the case where the file is in use
-                        Console.WriteLine($"Error writing to the file: {ex.Message}");
+                    catch(Exception ex) {
+                        WriteLog("Log file current not accessible");
                     }
-                    LoadLogFile();
+
+                    
                 }
             }
             
@@ -892,7 +899,7 @@ namespace SimConnect2Matric2
                                     variables.Add(vString);
                                 }
                             }
-                            if (matric != null) { 
+                            if (matric != null && variables.Count > 0) { 
                                 matric.SetVariables(variables);
                             }
                         }
@@ -1043,6 +1050,21 @@ namespace SimConnect2Matric2
         {
             AboutForm AboutForm = new AboutForm();
             AboutForm.ShowDialog();
+        }
+
+        private void gitHubToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/FeelSoMoon/SimConnect2Matric2");
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.Application.Exit();
+        }
+
+        private void donateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.paypal.com/donate/?business=PGG4UGGB7V6SL&no_recurring=0&item_name=Donate+so+that+Lando+may+have+all+the+biscuits+his+heart+desires.&currency_code=GBP");
         }
     }
 }

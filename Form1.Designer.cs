@@ -43,6 +43,7 @@ namespace SimConnect2Matric2
             this.forceDataSyncToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gitHubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewSimVarsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,6 +52,7 @@ namespace SimConnect2Matric2
             this.toolStripProgressBarSimConnect = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusMatric = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBarMatric = new System.Windows.Forms.ToolStripStatusLabel();
+            this.donateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -125,6 +127,7 @@ namespace SimConnect2Matric2
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
@@ -161,8 +164,10 @@ namespace SimConnect2Matric2
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.helpToolStripMenuItem,
+            this.gitHubToolStripMenuItem,
             this.viewSimVarsToolStripMenuItem,
             this.aboutToolStripMenuItem,
+            this.donateToolStripMenuItem,
             this.aboutToolStripMenuItem1});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(44, 20);
@@ -174,6 +179,13 @@ namespace SimConnect2Matric2
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.helpToolStripMenuItem.Text = "View Documentation";
             this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
+            // 
+            // gitHubToolStripMenuItem
+            // 
+            this.gitHubToolStripMenuItem.Name = "gitHubToolStripMenuItem";
+            this.gitHubToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.gitHubToolStripMenuItem.Text = "GitHub";
+            this.gitHubToolStripMenuItem.Click += new System.EventHandler(this.gitHubToolStripMenuItem_Click);
             // 
             // viewSimVarsToolStripMenuItem
             // 
@@ -240,6 +252,13 @@ namespace SimConnect2Matric2
             this.toolStripProgressBarMatric.Size = new System.Drawing.Size(37, 17);
             this.toolStripProgressBarMatric.Text = "          ";
             // 
+            // donateToolStripMenuItem
+            // 
+            this.donateToolStripMenuItem.Name = "donateToolStripMenuItem";
+            this.donateToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.donateToolStripMenuItem.Text = "Donate";
+            this.donateToolStripMenuItem.Click += new System.EventHandler(this.donateToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -288,6 +307,8 @@ namespace SimConnect2Matric2
         public System.Windows.Forms.ToolStripStatusLabel toolStripProgressBarSimConnect;
         public System.Windows.Forms.ToolStripStatusLabel toolStripProgressBarMatric;
         private System.Windows.Forms.ToolStripMenuItem viewSimVarsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gitHubToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem donateToolStripMenuItem;
     }
 }
 
