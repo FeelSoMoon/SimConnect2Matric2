@@ -84,4 +84,10 @@
     <MatricType>6</MatricType>
     <Value />
   </SimConnectDataTable>
+  <SimConnectDataTable>
+    <DataItem>AUTOPILOT VERTICAL HOLD VAR</DataItem>
+    <DataType>0</DataType>
+    <MatricType>0</MatricType>
+    <Value />
+  </SimConnectDataTable>
 </NewDataSet>

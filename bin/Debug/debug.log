@@ -1841,3 +1841,27 @@
 14:44:10 - Will check again for required apps in 60 seconds
 14:44:10 - DataTable exists, will attempt to load XML.
 14:44:10 - DataTable loaded
+09:36:54 - Initialising DataGridView
+09:36:54 - Initialising DataTable
+09:36:54 - Binding DataTable to DataGridView
+09:36:54 - Checking for required applications
+09:36:54 - MatricServer is not running
+09:36:54 - FlightSimulator is not running
+09:36:54 - Will check again for required apps in 60 seconds
+09:36:54 - DataTable exists, will attempt to load XML.
+09:36:54 - DataTable loaded
+09:37:54 - Checking for required applications
+09:37:54 - MatricServer is not running
+09:37:54 - FlightSimulator is not running
+09:37:54 - Will check again for required apps in 60 seconds
+09:38:27 - User Triggered XML Save
+09:49:58 - Initialising DataGridView
+09:49:58 - Initialising DataTable
+09:49:58 - Binding DataTable to DataGridView
+09:49:58 - Checking for required applications
+09:49:58 - MatricServer is not running
+09:49:58 - FlightSimulator is not running
+09:49:58 - Will check again for required apps in 60 seconds
+09:49:58 - DataTable exists, will attempt to load XML.
+09:49:58 - DataTable loaded
+09:50:02 - User exit, disposing of connection

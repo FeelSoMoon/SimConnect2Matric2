@@ -830,7 +830,7 @@ namespace SimConnect2Matric2
 
                             string fieldName = $"d{i}";
                             var fieldValue = typeof(SimConnectData).GetField(fieldName)?.GetValue(s1);
-                            string formattedData = FormatData(fieldValue, ObjToMatricType(row["MatricType"]));
+                            string formattedData = FormatData(fieldValue, row);
                             string storedValue = row["Value"]?.ToString()?.Trim();
 
                             if (fieldValue != null)
@@ -887,8 +887,6 @@ namespace SimConnect2Matric2
                                         VarType = ServerVariable.ServerVariableType.STRING;
                                     }
                                     
-                                    //Console.WriteLine($"{innerKvp.Key} = {innerKvp.Value}");
-                                    //ServerVariable.ServerVariableType.STRING
                                     ServerVariable vString = new ServerVariable()
                                     {
 
@@ -933,11 +931,30 @@ namespace SimConnect2Matric2
             }
         }
 
-        string FormatData(object input,string formatType)
+        string FormatData(object input,DataRow tableRow)
         {
+            string formatType = ObjToMatricType(tableRow["MatricType"]);
+            string rowDataItem = tableRow["DataItem"].ToString();
+
             //Console.WriteLine("Formatting: "+input.ToString()+" into the format "+formatType);
             string output="";
+            bool uoutput = false;
             double _input = Convert.ToDouble(input);
+
+            
+
+            //handle unique cases
+            if (rowDataItem == "AUTOPILOT VERTICAL HOLD VAR")
+            {
+                output=Convert.ToString(Math.Round(_input, 0) * 200);
+            }
+
+            if (uoutput)
+            {
+                return output;
+            }
+
+
             switch (formatType)
             {
 
@@ -946,6 +963,7 @@ namespace SimConnect2Matric2
                     break;
 
                 case "output_number":
+                    
                     output = Convert.ToString(Math.Round(_input));
                     break;
 
