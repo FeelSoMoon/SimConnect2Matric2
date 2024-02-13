@@ -46,13 +46,13 @@ namespace SimConnect2Matric2
             this.gitHubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewSimVarsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.donateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusSimConnect = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBarSimConnect = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusMatric = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBarMatric = new System.Windows.Forms.ToolStripStatusLabel();
-            this.donateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -61,9 +61,9 @@ namespace SimConnect2Matric2
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(415, 12);
+            this.dataGridView1.Location = new System.Drawing.Point(494, 12);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(580, 419);
+            this.dataGridView1.Size = new System.Drawing.Size(730, 419);
             this.dataGridView1.TabIndex = 10;
             // 
             // textLog
@@ -74,7 +74,7 @@ namespace SimConnect2Matric2
             this.textLog.Name = "textLog";
             this.textLog.ReadOnly = true;
             this.textLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textLog.Size = new System.Drawing.Size(397, 404);
+            this.textLog.Size = new System.Drawing.Size(476, 404);
             this.textLog.TabIndex = 15;
             this.textLog.WordWrap = false;
             // 
@@ -86,7 +86,7 @@ namespace SimConnect2Matric2
             this.toolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1001, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1236, 24);
             this.menuStrip1.TabIndex = 22;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -201,6 +201,13 @@ namespace SimConnect2Matric2
             this.aboutToolStripMenuItem.Text = "Open Discord";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
+            // donateToolStripMenuItem
+            // 
+            this.donateToolStripMenuItem.Name = "donateToolStripMenuItem";
+            this.donateToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.donateToolStripMenuItem.Text = "Donate";
+            this.donateToolStripMenuItem.Click += new System.EventHandler(this.donateToolStripMenuItem_Click);
+            // 
             // aboutToolStripMenuItem1
             // 
             this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
@@ -218,7 +225,7 @@ namespace SimConnect2Matric2
             this.statusStrip1.Location = new System.Drawing.Point(0, 435);
             this.statusStrip1.Margin = new System.Windows.Forms.Padding(5);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1001, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1236, 22);
             this.statusStrip1.TabIndex = 23;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -252,25 +259,16 @@ namespace SimConnect2Matric2
             this.toolStripProgressBarMatric.Size = new System.Drawing.Size(37, 17);
             this.toolStripProgressBarMatric.Text = "          ";
             // 
-            // donateToolStripMenuItem
-            // 
-            this.donateToolStripMenuItem.Name = "donateToolStripMenuItem";
-            this.donateToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
-            this.donateToolStripMenuItem.Text = "Donate";
-            this.donateToolStripMenuItem.Click += new System.EventHandler(this.donateToolStripMenuItem_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1001, 457);
+            this.ClientSize = new System.Drawing.Size(1236, 457);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.textLog);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.menuStrip1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MainMenuStrip = this.menuStrip1;
-            this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "SimConnect 2 Matric 2";
             this.Load += new System.EventHandler(this.Form1_Load);

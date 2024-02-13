@@ -31,6 +31,12 @@
     <Value />
   </SimConnectDataTable>
   <SimConnectDataTable>
+    <DataItem>PLANE ALTITUDE</DataItem>
+    <DataType>1</DataType>
+    <MatricType>0</MatricType>
+    <Value />
+  </SimConnectDataTable>
+  <SimConnectDataTable>
     <DataItem>PLANE HEADING DEGREES TRUE</DataItem>
     <DataType>2</DataType>
     <MatricType>3</MatricType>
@@ -76,54 +82,6 @@
     <DataItem>LIGHT BEACON</DataItem>
     <DataType>0</DataType>
     <MatricType>6</MatricType>
-    <Value />
-  </SimConnectDataTable>
-  <SimConnectDataTable>
-    <DataItem>AUTOPILOT VERTICAL HOLD VAR</DataItem>
-    <DataType>0</DataType>
-    <MatricType>0</MatricType>
-    <Value />
-  </SimConnectDataTable>
-  <SimConnectDataTable>
-    <DataItem>KOHLSMAN SETTING HG:1</DataItem>
-    <DataType>0</DataType>
-    <MatricType>2</MatricType>
-    <Value />
-  </SimConnectDataTable>
-  <SimConnectDataTable>
-    <DataItem>GROUND VELOCITY</DataItem>
-    <DataType>0</DataType>
-    <MatricType>0</MatricType>
-    <Value />
-  </SimConnectDataTable>
-  <SimConnectDataTable>
-    <DataItem>KOHLSMAN SETTING STD:1</DataItem>
-    <DataType>0</DataType>
-    <MatricType>0</MatricType>
-    <Value />
-  </SimConnectDataTable>
-  <SimConnectDataTable>
-    <DataItem>AUTOPILOT HEADING LOCK DIR</DataItem>
-    <DataType>0</DataType>
-    <MatricType>0</MatricType>
-    <Value />
-  </SimConnectDataTable>
-  <SimConnectDataTable>
-    <DataItem>AUTOPILOT ALTITUDE LOCK VAR</DataItem>
-    <DataType>0</DataType>
-    <MatricType>0</MatricType>
-    <Value />
-  </SimConnectDataTable>
-  <SimConnectDataTable>
-    <DataItem>PLANE ALT ABOVE GROUND</DataItem>
-    <DataType>0</DataType>
-    <MatricType>0</MatricType>
-    <Value />
-  </SimConnectDataTable>
-  <SimConnectDataTable>
-    <DataItem>NAV OBS:1</DataItem>
-    <DataType>0</DataType>
-    <MatricType>0</MatricType>
     <Value />
   </SimConnectDataTable>
   <SimConnectDataTable>

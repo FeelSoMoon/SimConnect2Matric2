@@ -184,6 +184,10 @@ namespace SimConnect2Matric2
             {
                 CheckForRunningApps();
             }
+
+            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left;
+            textLog.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+
             this.FormClosing += Form1_FormClosing;
         }
 
@@ -200,7 +204,7 @@ namespace SimConnect2Matric2
                 case 3:
                     color = Color.Green;
                     if (set) { MatricStatus = true; }
-                    retryMatricToolStripMenuItem.Enabled = false;
+                    //retryMatricToolStripMenuItem.Enabled = false;
                     break;
                 default:
                     color = Color.Red;
@@ -251,12 +255,13 @@ namespace SimConnect2Matric2
 
         private void InitMatric()
         {
-
             matric = null;
             WriteLog("Initialising Matric");
-            try
-            {
-                matric = new Matric.Integration.Matric(MATRIC_APP_NAME, "", MATRIC_API_PORT);
+            try { 
+                if (matric == null) {
+                    matric = new Matric.Integration.Matric(MATRIC_APP_NAME, "", MATRIC_API_PORT);
+                }
+                Console.WriteLine(matric.GetType());
             }
             catch (Exception ex)
             {
@@ -476,10 +481,18 @@ namespace SimConnect2Matric2
                 Width = 120
             };
 
+            DataGridViewTextBoxColumn textValue = new DataGridViewTextBoxColumn
+            {
+                HeaderText = "Value",
+                DataPropertyName = "Value",
+                Width = 120
+            };
+
             // Add the DataGridViewComboBoxColumn to the DataGridView
             dataGridView1.Columns.Add(textDataItem);
             dataGridView1.Columns.Add(comboBoxDataType);
             dataGridView1.Columns.Add(comboBoxMatricType);
+            dataGridView1.Columns.Add(textValue);
 
             // Subscribe to the DataError event
             dataGridView1.DataError += DataGridView1_DataError;
@@ -663,7 +676,6 @@ namespace SimConnect2Matric2
             }
         }
 
-
         public string SimConnectExceptionToString(object myObj)
         {
             SIMCONNECT_EXCEPTION[] enumValues = (SIMCONNECT_EXCEPTION[])Enum.GetValues(typeof(SIMCONNECT_EXCEPTION));
@@ -796,7 +808,6 @@ namespace SimConnect2Matric2
             SimConnectSetStatus(3);
         }
 
-        // The case where the user closes the sim
         void Simconnect_OnRecvQuit(SimConnect sender, SIMCONNECT_RECV data)
         {
             WriteLog("SimConnect connection lost");
@@ -1039,8 +1050,15 @@ namespace SimConnect2Matric2
         {
             WriteLog("Retrying Matric Connection");
             RunMatric = true;
-            InitMatric();
             MatricSetStatus(2);
+            if (matric != null)
+            {
+                MatricGetClients();
+            }
+            else
+            {
+                InitMatric();
+            }
         }
 
         private void forceDataSyncToolStripMenuItem_Click(object sender, EventArgs e)
