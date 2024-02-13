@@ -19,6 +19,7 @@ using System.Timers;
 using static System.Windows.Forms.LinkLabel;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Net.Sockets;
+using Newtonsoft.Json.Linq;
 
 public enum SimConnectDataTypes
 {
@@ -185,39 +186,37 @@ namespace SimConnect2Matric2
                 CheckForRunningApps();
             }
 
+            //anchoring ui elements
             dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left;
             textLog.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
 
             this.FormClosing += Form1_FormClosing;
         }
 
-        private void MatricSetStatus(int status, bool set = true)
+        private void MatricSetStatus(int status)
         {
             Color color;
             switch (status)
             {
                 case 2:
                     color = Color.Yellow;
-                    if (set) { MatricStatus = true; }
+                    MatricStatus = true;
                     
                     break;
                 case 3:
                     color = Color.Green;
-                    if (set) { MatricStatus = true; }
-                    //retryMatricToolStripMenuItem.Enabled = false;
+                    MatricStatus = true;
                     break;
                 default:
                     color = Color.Red;
-                    if (set) { MatricStatus = false; }
+                    MatricStatus = false;
                     break;
             }
             if (statusStrip1.InvokeRequired)
             {
                 // Call the same method on the UI thread
                 statusStrip1.Invoke(new Action(() => MatricSetStatus(status)));
-            }
-            else
-            {
+            }else{
                 // Update label color on the UI thread
                 toolStripProgressBarMatric.BackColor = color;
             }
@@ -257,11 +256,8 @@ namespace SimConnect2Matric2
         {
             matric = null;
             WriteLog("Initialising Matric");
-            try { 
-                if (matric == null) {
-                    matric = new Matric.Integration.Matric(MATRIC_APP_NAME, "", MATRIC_API_PORT);
-                }
-                Console.WriteLine(matric.GetType());
+            try {
+                matric = matric ?? new Matric.Integration.Matric(MATRIC_APP_NAME, "", MATRIC_API_PORT);
             }
             catch (Exception ex)
             {
@@ -309,9 +305,7 @@ namespace SimConnect2Matric2
                 MatricStatus = false;
                 MatricSetStatus(2);
                 WriteLog("Matric: No connected devices found");
-            }
-            else
-            {
+            }else{
                 foreach (ClientInfo client in connectedClients)
                 {
                    WriteLog($@"Matric Found devices: {client.Name}");
@@ -340,11 +334,8 @@ namespace SimConnect2Matric2
 
         private void MatricGetClients()
         {
-            if (matric != null)
-            {
-                WriteLog("Matric: Getting Clients");
-                matric.GetConnectedClients();
-            }
+            WriteLog("Matric: Getting Clients");
+            matric?.GetConnectedClients();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -364,15 +355,13 @@ namespace SimConnect2Matric2
             CheckDebugExists();
             LoadLogFile();
         }
-        private async void LoadLogFile()
+        private void LoadLogFile()
         {
             try{
                 int NumberOfLinesToShow = 28;
                 var lines = File.ReadLines(logFilePath);
                 var lastLines = lines.Skip(Math.Max(0, lines.Count() - NumberOfLinesToShow));
-
                 textLog.Text= string.Join(Environment.NewLine, lastLines);
-                await Task.Delay(25);
                 //ScrollTextBoxToBottom(textLog);
             }
             catch (Exception ex)
@@ -381,7 +370,6 @@ namespace SimConnect2Matric2
                 // Handle exceptions, e.g., display an error message
                // MessageBox.Show($"Error loading log file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
         }
 
         private void WriteLog(string newline)
@@ -394,15 +382,10 @@ namespace SimConnect2Matric2
             else
             {
                 string currentTimeFormatted = DateTime.Now.ToString("HH:mm:ss");
-                //Console.WriteLine("Trying to write: "+newline);
                 FileInfo fileInfo = new FileInfo(logFilePath);
                 if (fileInfo.Exists)
                 {
-                    //Console.WriteLine("fileInfo exists");
-                    // Get the size of the file in bytes
                     long fileSizeInBytes = fileInfo.Length;
-
-                    // Convert bytes to kilobytes or megabytes for better readability
                     double fileSizeInKB = fileSizeInBytes / 1024.0; // Bytes to Kilobytes
 
                     try
@@ -410,7 +393,6 @@ namespace SimConnect2Matric2
                         string[] lines = File.ReadAllLines(logFilePath);
                         if (fileSizeInKB > MAX_LOG_SIZE)
                         {
-                            // Skip the first line and get the remaining lines
                             lines = lines.Skip(50).ToArray();
                         }
                         lines = lines.Concat(new[] { currentTimeFormatted + " - " + newline }).ToArray();
@@ -445,7 +427,7 @@ namespace SimConnect2Matric2
                 logFile.Close();
                 WriteLog("Log File Created");
             }
-            if(File.Exists(logFilePath)) { return true; }else { return false; }
+            return File.Exists(logFilePath);
         }
 
         static void ScrollTextBoxToBottom(System.Windows.Forms.TextBox textBox)
@@ -494,10 +476,10 @@ namespace SimConnect2Matric2
             dataGridView1.Columns.Add(comboBoxMatricType);
             dataGridView1.Columns.Add(textValue);
 
+            dataGridView1.AutoGenerateColumns = false;
+
             // Subscribe to the DataError event
             dataGridView1.DataError += DataGridView1_DataError;
-
-            dataGridView1.AutoGenerateColumns = false;
         }
 
         private void InitializeDataTable()
@@ -507,6 +489,15 @@ namespace SimConnect2Matric2
             myDataTable.Columns.Add("DataType", typeof(SimConnectDataTypes));
             myDataTable.Columns.Add("MatricType", typeof(MatricDataTypes));
             myDataTable.Columns.Add("Value", typeof(string));
+
+            myDataTable.RowDeleted += OnRowDeleted;
+            //myDataTable.RowChanged += OnRowDeleted;
+        }
+
+        private void OnRowDeleted(object sender, DataRowChangeEventArgs e)
+        {
+            //SaveXML();
+            InitDataRequest();
         }
 
         private void BindDataTableToDataGridView()
@@ -582,7 +573,7 @@ namespace SimConnect2Matric2
             }));
         }
 
-        static bool IsProcessRunning(string processName)
+        private bool IsProcessRunning(string processName)
         {
             Process[] processes = Process.GetProcessesByName(processName);
             return processes.Length > 0;
@@ -590,13 +581,10 @@ namespace SimConnect2Matric2
 
         private void SaveXML()
         {
-            //Console.WriteLine("trying to save");
             foreach (DataRow row in myDataTable.Rows)
             {
-                row["Value"] = "";
+                row["Value"] = string.Empty;
             }
-
-
             myDataTable.AcceptChanges();
             myDataTable.WriteXml(dataTablePath, XmlWriteMode.WriteSchema, true);
         }
@@ -632,8 +620,7 @@ namespace SimConnect2Matric2
 
         private Boolean DataFileExist()
         {
-            if(File.Exists(dataTablePath))
-            { return true; }else { return false; }
+            return File.Exists(dataTablePath);
         }
 
         private void DataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
@@ -650,30 +637,20 @@ namespace SimConnect2Matric2
             MatricDataTypes[] enumValues = (MatricDataTypes[])Enum.GetValues(typeof(MatricDataTypes));
             if (int.TryParse(myObj.ToString(), out int intValue))
             {
-                //Console.WriteLine($"Converted value: {intValue}");
-                //Console.WriteLine($"Selected Enum Value: {selectedEnumValue}");
                 MatricDataTypes selectedEnumValue = enumValues[intValue];
                 return selectedEnumValue.ToString();
             }
-            else
-            {
-                return "";
-            }
+            return string.Empty;
         }
         public string ObjToDataType(object myObj)
         {
             SimConnectDataTypes[] enumValues = (SimConnectDataTypes[])Enum.GetValues(typeof(SimConnectDataTypes));
             if (int.TryParse(myObj.ToString(), out int intValue))
             {
-                //Console.WriteLine($"Converted value: {intValue}");
-                //Console.WriteLine($"Selected Enum Value: {selectedEnumValue}");
                 SimConnectDataTypes selectedEnumValue = enumValues[intValue];
                 return selectedEnumValue.ToString();
             }
-            else
-            {
-                return "";
-            }
+            return string.Empty;
         }
 
         public string SimConnectExceptionToString(object myObj)
@@ -681,15 +658,10 @@ namespace SimConnect2Matric2
             SIMCONNECT_EXCEPTION[] enumValues = (SIMCONNECT_EXCEPTION[])Enum.GetValues(typeof(SIMCONNECT_EXCEPTION));
             if (int.TryParse(myObj.ToString(), out int intValue))
             {
-                //Console.WriteLine($"Converted value: {intValue}");
-                //Console.WriteLine($"Selected Enum Value: {selectedEnumValue}");
                 SIMCONNECT_EXCEPTION selectedEnumValue = enumValues[intValue];
                 return selectedEnumValue.ToString();
             }
-            else
-            {
-                return "";
-            }
+            return string.Empty;
         }
 
         private void InitDataRequest()
@@ -777,21 +749,19 @@ namespace SimConnect2Matric2
             }
         }
 
+        
         protected override void DefWndProc(ref Message m)
         {
             if (m.Msg == WM_USER_SIMCONNECT)
             {
-                if (simconnect != null)
+                try
                 {
-                    try
-                    {
-                        simconnect.ReceiveMessage();
-                    } catch (Exception ex) {
-                        WriteLog("MSFS was closed unexpectedly");
-                        SimConnectSetStatus(1);
-                        if (!CheckingForApps) {
-                            CheckForRunningApps();
-                        }
+                    simconnect?.ReceiveMessage();
+                } catch (Exception ex) {
+                    WriteLog("MSFS was closed unexpectedly");
+                    SimConnectSetStatus(1);
+                    if (!CheckingForApps) {
+                        CheckForRunningApps();
                     }
                 }
             }
@@ -848,20 +818,11 @@ namespace SimConnect2Matric2
                             {
                                 if (formattedData != storedValue)
                                 { 
-                                    WriteLog(row["DataItem"].ToString() + " changed from " + row["Value"].ToString() + " to " + formattedData);
-                                    // Do something with the field value
-                                    //Console.WriteLine($"Value of {fieldName}: {fieldValue}");
+                                    //removed from WriteLog because certain vars can spam the log
+                                    //WriteLog(row["DataItem"].ToString() + " changed from " + row["Value"].ToString() + " to " + formattedData);
                                     row["Value"] = formattedData;
                                     DataDictionary[i] = new Dictionary<string, string> { { row["DataItem"].ToString(), formattedData } };
                                 }
-                                else
-                                {
-                                    //Console.WriteLine($"{row["DataItem"].ToString()} has not changed.");
-                                }
-                            }
-                            else
-                            {
-                                //Console.WriteLine($"Field with name {fieldName} not found");
                             }
                             i++;
                         }
@@ -875,32 +836,22 @@ namespace SimConnect2Matric2
                             // Iterate through the outer dictionary
                             foreach (KeyValuePair<int, Dictionary<string, string>> outerKvp in DataDictionary)
                             {
-                                //Console.WriteLine($"Key: {outerKvp.Key}");
-
                                 // Iterate through the inner dictionary
                                 foreach (KeyValuePair<string, string> innerKvp in outerKvp.Value)
                                 {
                                     //search datatable, check if this has the output type of "button"
                                     DataRow[] searchResults = myDataTable.Select($"DataItem = '{innerKvp.Key}'");
-                                    string matricTypeValue = "";
+                                    string matricTypeValue = string.Empty;
                                     ServerVariableType VarType;
                                     if (searchResults.Length > 0)
                                     {
                                         matricTypeValue = ObjToMatricType(searchResults[0].Field<int>("MatricType"));
                                     }
 
-                                    if (matricTypeValue == "button")
-                                    {
-                                        VarType = ServerVariable.ServerVariableType.BOOL;
-                                    }
-                                    else
-                                    {
-                                        VarType = ServerVariable.ServerVariableType.STRING;
-                                    }
-                                    
+                                    VarType = (matricTypeValue == "button") ? ServerVariable.ServerVariableType.BOOL : ServerVariable.ServerVariableType.STRING;
+
                                     ServerVariable vString = new ServerVariable()
                                     {
-
                                         Name = innerKvp.Key,
                                         VariableType = VarType,
                                         Value = innerKvp.Value
@@ -908,11 +859,11 @@ namespace SimConnect2Matric2
                                     variables.Add(vString);
                                 }
                             }
-                            if (matric != null && variables.Count > 0) { 
-                                matric.SetVariables(variables);
+                            if (variables.Count > 0) { 
+                                matric?.SetVariables(variables);
                             }
                         }
-
+                        //for debug only
                         //DisplayDataDictionary();
                     }
                     break;
@@ -952,60 +903,48 @@ namespace SimConnect2Matric2
             bool uoutput = false;
             double _input = Convert.ToDouble(input);
 
-            
-
             //handle unique cases
-            if (rowDataItem == "AUTOPILOT VERTICAL HOLD VAR")
-            {
-                output=Convert.ToString(Math.Round(_input, 0) * 200);
-            }
-
-            if (uoutput)
-            {
-                return output;
-            }
-
+            string[] unique_formats = { "AUTOPILOT VERTICAL HOLD VAR" };
+            uoutput = unique_formats.Contains(rowDataItem);
+            formatType = uoutput ? "unique" : formatType;
 
             switch (formatType)
             {
-
                 case "output_decimal":
-                    output = Convert.ToString(Math.Round(_input, 2));
+                    output = $"{Math.Round(_input,2)}";
                     break;
 
                 case "output_number":
                     
-                    output = Convert.ToString(Math.Round(_input));
+                    output = $"{Math.Round(_input)}";
                     break;
 
                 case "output_heading":
-                    output = Convert.ToString(Math.Round(Rad2deg(_input)));
+                    output = $"{Rad2deg(_input):F0}";
                     break;
 
                 case "output_transponder":
-                    output = (_input < 10 ? "0" : "") + (_input < 100 ? "0" : "") + (_input < 1000 ? "0" : "") + Convert.ToString(_input);
+                    output = _input.ToString().PadLeft(3, '0');
                     break;
 
                 case "output_frequency":
                     string inputstring = _input.ToString();
                     output = inputstring;
-                    if (inputstring != "0")
-                    {
-                        output = inputstring.Substring(0, 3) + "." + inputstring.Substring(3, 3);
-                    }
+                    output = inputstring != "0" ? $"{inputstring.Substring(0, 3)}.{inputstring.Substring(3, 3)}" : null;
                     break;
 
                 case "button":
-                    if (Math.Round(_input) == 1)
-                    {
-                        output = "true";
-                    }else{
-                        output = "false";
-                    }
+                    output = Math.Round(_input) == 1 ? "true" : "false";
                     break;
 
                 default:
-                    //default
+                    //now we'll handle formatType based on unique cases by looking at the SimVar name
+                    switch(rowDataItem)
+                    {
+                        case "AUTOPILOT VERTICAL HOLD VAR":
+                            output = Convert.ToString(Math.Round(_input / 1.66) * 100);
+                            break;
+                    }
                     break;
             }
             return output;

@@ -19,18 +19,6 @@
     </xs:element>
   </xs:schema>
   <SimConnectDataTable>
-    <DataItem>PLANE LATITUDE</DataItem>
-    <DataType>3</DataType>
-    <MatricType>1</MatricType>
-    <Value />
-  </SimConnectDataTable>
-  <SimConnectDataTable>
-    <DataItem>PLANE LONGITUDE</DataItem>
-    <DataType>3</DataType>
-    <MatricType>1</MatricType>
-    <Value />
-  </SimConnectDataTable>
-  <SimConnectDataTable>
     <DataItem>PLANE HEADING DEGREES TRUE</DataItem>
     <DataType>2</DataType>
     <MatricType>3</MatricType>
@@ -85,12 +73,6 @@
     <Value />
   </SimConnectDataTable>
   <SimConnectDataTable>
-    <DataItem>KOHLSMAN SETTING HG:1</DataItem>
-    <DataType>0</DataType>
-    <MatricType>2</MatricType>
-    <Value />
-  </SimConnectDataTable>
-  <SimConnectDataTable>
     <DataItem>GROUND VELOCITY</DataItem>
     <DataType>0</DataType>
     <MatricType>0</MatricType>
@@ -115,12 +97,6 @@
     <Value />
   </SimConnectDataTable>
   <SimConnectDataTable>
-    <DataItem>PLANE ALT ABOVE GROUND</DataItem>
-    <DataType>0</DataType>
-    <MatricType>0</MatricType>
-    <Value />
-  </SimConnectDataTable>
-  <SimConnectDataTable>
     <DataItem>NAV OBS:1</DataItem>
     <DataType>0</DataType>
     <MatricType>0</MatricType>
@@ -128,7 +104,7 @@
   </SimConnectDataTable>
   <SimConnectDataTable>
     <DataItem>AUTOPILOT VERTICAL HOLD VAR</DataItem>
-    <DataType>0</DataType>
+    <DataType>1</DataType>
     <MatricType>0</MatricType>
     <Value />
   </SimConnectDataTable>
