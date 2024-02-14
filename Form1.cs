@@ -43,6 +43,16 @@ public enum MatricDataTypes
     button
 }
 
+public enum TransponderState
+{
+    Off,
+    Standby,
+    Test,
+    On,
+    Alt,
+    Ground
+}
+
 enum DEFINITIONS
 {
     SimConnectData,
@@ -145,9 +155,9 @@ namespace SimConnect2Matric2
 
         // SimConnect object
         SimConnect simconnect = null;
+
         // User-defined win32 event
         const int WM_USER_SIMCONNECT = 0x0402;
-
         const int MAX_LOG_SIZE = 100;
 
         readonly string logFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "debug.log");
@@ -168,6 +178,9 @@ namespace SimConnect2Matric2
 
         private readonly object lockCheck = new object();
         private bool CheckingForApps = false;
+
+        //define which SimVars need to be handled uniquely.
+        public string[] uniqueFormats = { "AUTOPILOT VERTICAL HOLD VAR", "TRANSPONDER STATE"};
 
         static Matric.Integration.Matric matric;
 
@@ -221,6 +234,7 @@ namespace SimConnect2Matric2
                 toolStripProgressBarMatric.BackColor = color;
             }
         }
+
 
         private void SimConnectSetStatus(int status)
         {
@@ -632,16 +646,27 @@ namespace SimConnect2Matric2
             e.ThrowException = false;
         }
 
-        public string ObjToMatricType(object myObj)
+        public string EnumToString(int enumIndex, Type enumType)
         {
-            MatricDataTypes[] enumValues = (MatricDataTypes[])Enum.GetValues(typeof(MatricDataTypes));
-            if (int.TryParse(myObj.ToString(), out int intValue))
+            // Check if the provided type is an enum
+            if (!enumType.IsEnum)
             {
-                MatricDataTypes selectedEnumValue = enumValues[intValue];
-                return selectedEnumValue.ToString();
+                Console.WriteLine("Type provided is not an enum");
             }
-            return string.Empty;
+
+            string[] enumNames = Enum.GetNames(enumType);
+
+            // Check if the provided index is within the valid range
+            if (enumIndex < 0 || enumIndex >= enumNames.Length)
+            {
+                Console.WriteLine("Enum index is out of range");
+            }
+
+            string enumString = enumNames[enumIndex];
+
+            return enumString;
         }
+
         public string ObjToDataType(object myObj)
         {
             SimConnectDataTypes[] enumValues = (SimConnectDataTypes[])Enum.GetValues(typeof(SimConnectDataTypes));
@@ -709,9 +734,7 @@ namespace SimConnect2Matric2
 
                     foreach (DataRow row in myDataTable.Rows)
                     {
-                        //Console.WriteLine("Adding to def " + row["DataItem"].ToString() + " : " + ObjToDataType(row["DataType"]));
-                        simconnect.AddToDataDefinition(DEFINITIONS.SimConnectData, row["DataItem"].ToString(), ObjToDataType(row["DataType"]), SIMCONNECT_DATATYPE.FLOAT64, 0.0f, SimConnect.SIMCONNECT_UNUSED);
-                        //DataItemList.Add(row["DataItem"].ToString());
+                        simconnect.AddToDataDefinition(DEFINITIONS.SimConnectData, row["DataItem"].ToString(), EnumToString(Convert.ToInt32(row["DataType"]),typeof(SimConnectDataTypes)), SIMCONNECT_DATATYPE.FLOAT64, 0.0f, SimConnect.SIMCONNECT_UNUSED);
                         DataDictionary[i] = new Dictionary<string, string> { { row["DataItem"].ToString(), "" } };
                         i++;
                     }
@@ -726,16 +749,15 @@ namespace SimConnect2Matric2
                     // catch a simobject data request
                     simconnect.OnRecvSimobjectData += new SimConnect.RecvSimobjectDataEventHandler(Simconnect_OnRecvSimobjectData);
 
-                    // Request FSX data every second
+                    // Request data at the specified period.
                     simconnect.RequestDataOnSimObject(DATA_REQUESTS.REQUEST_1
-                         , DEFINITIONS.SimConnectData
-                         , SimConnect.SIMCONNECT_OBJECT_ID_USER
-                         , SIMCONNECT_PERIOD.VISUAL_FRAME   //SIM_FRAME   VISUAL_FRAME    SECOND
-                         , SIMCONNECT_DATA_REQUEST_FLAG.DEFAULT
-                         , 0
-                         , 0
-                         , 0);
-
+                    , DEFINITIONS.SimConnectData
+                    , SimConnect.SIMCONNECT_OBJECT_ID_USER
+                    , SIMCONNECT_PERIOD.VISUAL_FRAME   //SIM_FRAME   VISUAL_FRAME    SECOND
+                    , SIMCONNECT_DATA_REQUEST_FLAG.DEFAULT
+                    , 0
+                    , 0
+                    , 0);
                 }
                 else
                 {
@@ -817,9 +839,10 @@ namespace SimConnect2Matric2
                             if (fieldValue != null)
                             {
                                 if (formattedData != storedValue)
-                                { 
+                                {
                                     //removed from WriteLog because certain vars can spam the log
                                     //WriteLog(row["DataItem"].ToString() + " changed from " + row["Value"].ToString() + " to " + formattedData);
+                                    Console.WriteLine($"{row["DataItem"]} changed from {row["Value"]} to {formattedData} | pre formatted {fieldValue}");
                                     row["Value"] = formattedData;
                                     DataDictionary[i] = new Dictionary<string, string> { { row["DataItem"].ToString(), formattedData } };
                                 }
@@ -845,7 +868,7 @@ namespace SimConnect2Matric2
                                     ServerVariableType VarType;
                                     if (searchResults.Length > 0)
                                     {
-                                        matricTypeValue = ObjToMatricType(searchResults[0].Field<int>("MatricType"));
+                                        matricTypeValue=EnumToString(searchResults[0].Field<int>("MatricType"), typeof(MatricDataTypes));
                                     }
 
                                     VarType = (matricTypeValue == "button") ? ServerVariable.ServerVariableType.BOOL : ServerVariable.ServerVariableType.STRING;
@@ -895,7 +918,7 @@ namespace SimConnect2Matric2
 
         string FormatData(object input,DataRow tableRow)
         {
-            string formatType = ObjToMatricType(tableRow["MatricType"]);
+            string formatType = EnumToString(Convert.ToInt32(tableRow["MatricType"]),typeof(MatricDataTypes));
             string rowDataItem = tableRow["DataItem"].ToString();
 
             //Console.WriteLine("Formatting: "+input.ToString()+" into the format "+formatType);
@@ -903,11 +926,11 @@ namespace SimConnect2Matric2
             bool uoutput = false;
             double _input = Convert.ToDouble(input);
 
-            //handle unique cases
-            string[] unique_formats = { "AUTOPILOT VERTICAL HOLD VAR" };
-            uoutput = unique_formats.Contains(rowDataItem);
-            formatType = uoutput ? "unique" : formatType;
+            //if simvar name is in the unique format array then send it down the switch default
+            uoutput = uniqueFormats.Any(format => rowDataItem.Contains(format));
 
+            formatType = uoutput ? "unique" : formatType;
+            
             switch (formatType)
             {
                 case "output_decimal":
@@ -941,12 +964,16 @@ namespace SimConnect2Matric2
                     //now we'll handle formatType based on unique cases by looking at the SimVar name
                     switch(rowDataItem)
                     {
-                        case "AUTOPILOT VERTICAL HOLD VAR":
+                        case string s when s.Contains("AUTOPILOT VERTICAL HOLD VAR"):
                             output = Convert.ToString(Math.Round(_input / 1.66) * 100);
+                            break;
+                        case string s when s.Contains("TRANSPONDER STATE"):
+                            output = EnumToString(Convert.ToInt32(Math.Round(_input)), typeof(TransponderState));
                             break;
                     }
                     break;
             }
+            Console.WriteLine($"{rowDataItem}:{formatType}:{output}");
             return output;
         }
 

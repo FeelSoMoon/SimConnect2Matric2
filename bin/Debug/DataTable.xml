@@ -108,4 +108,10 @@
     <MatricType>0</MatricType>
     <Value />
   </SimConnectDataTable>
+  <SimConnectDataTable>
+    <DataItem>TRANSPONDER STATE:1</DataItem>
+    <DataType>0</DataType>
+    <MatricType>0</MatricType>
+    <Value />
+  </SimConnectDataTable>
 </NewDataSet>
