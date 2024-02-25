@@ -54,8 +54,9 @@
     <ApplicationIcon>matric_simconnect_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MatricIntegration">
-      <HintPath>..\..\..\..\..\..\Downloads\MATRICIntegrationDemo-master(1)\MATRICIntegrationDemo-master\demos\net_wrapper\lib\MatricIntegration.dll</HintPath>
+    <Reference Include="MatricIntegration, Version=2.8.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Ex Machina\MATRIC Desktop\MatricIntegration.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.FlightSimulator.SimConnect, Version=10.0.62615.0, Culture=neutral, PublicKeyToken=5f523ae7e6e1b389, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>

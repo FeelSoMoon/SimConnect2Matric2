@@ -20,6 +20,7 @@ using static System.Windows.Forms.LinkLabel;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Net.Sockets;
 using Newtonsoft.Json.Linq;
+using System.Net.Http.Headers;
 
 public enum SimConnectDataTypes
 {
@@ -424,13 +425,10 @@ namespace SimConnect2Matric2
                         LoadLogFile();
                     }
                     catch(Exception ex) {
-                        WriteLog("Log file current not accessible");
+                        WriteLog($"Error writing to the file: {ex.Message}");
                     }
-
-                    
                 }
             }
-            
         }
 
         private Boolean CheckDebugExists()
@@ -763,7 +761,6 @@ namespace SimConnect2Matric2
                 {
                     WriteLog("SimConnect is not running.");
                 }
-
             }
             catch (COMException ex)
             {
@@ -871,15 +868,34 @@ namespace SimConnect2Matric2
                                         matricTypeValue=EnumToString(searchResults[0].Field<int>("MatricType"), typeof(MatricDataTypes));
                                     }
 
-                                    VarType = (matricTypeValue == "button") ? ServerVariable.ServerVariableType.BOOL : ServerVariable.ServerVariableType.STRING;
-
-                                    ServerVariable vString = new ServerVariable()
+                                    //VarType = (matricTypeValue == "button") ? ServerVariable.ServerVariableType.BOOL : ServerVariable.ServerVariableType.STRING;
+                                    
+                                    if (matricTypeValue == "button")
                                     {
-                                        Name = innerKvp.Key,
-                                        VariableType = VarType,
-                                        Value = innerKvp.Value
-                                    };
-                                    variables.Add(vString);
+                                        ServerVariable vString = new ServerVariable()
+                                        {
+                                            Name = innerKvp.Key,
+                                            VariableType = ServerVariable.ServerVariableType.BOOL,
+                                            Value = Convert.ToBoolean(innerKvp.Value),
+                                            IsPersistent = true,
+                                            IsUserEditable = true
+                                        };
+                                        variables.Add(vString);
+                                    }
+                                    else
+                                    {
+                                        ServerVariable vString = new ServerVariable()
+                                        {
+                                            Name = innerKvp.Key,
+                                            VariableType = ServerVariable.ServerVariableType.STRING,
+                                            Value = innerKvp.Value,
+                                            IsPersistent = true,
+                                            IsUserEditable = true
+                                        };
+                                        variables.Add(vString);
+                                    }
+                                    
+                                    
                                 }
                             }
                             if (variables.Count > 0) { 
@@ -973,7 +989,7 @@ namespace SimConnect2Matric2
                     }
                     break;
             }
-            Console.WriteLine($"{rowDataItem}:{formatType}:{output}");
+            //Console.WriteLine($"{rowDataItem}:{formatType}:{output}");
             return output;
         }
 
